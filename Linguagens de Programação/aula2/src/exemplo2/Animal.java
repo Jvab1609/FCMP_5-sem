@@ -11,6 +11,10 @@ package exemplo2;
 public abstract class Animal {
     private boolean alive;
 
+    public Animal(boolean alive) {
+        this.alive = alive;
+    }
+
     public boolean isAlive() {
         return alive;
     }
