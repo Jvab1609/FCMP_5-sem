@@ -14,7 +14,7 @@ public class Dog extends Animal implements Terrestrial, Mammal {
     private int breasts;
 
     public Dog(boolean walking, int breasts, boolean alive) {
-        super(alive); // Passando a caracterÃ­stica do pai
+        super(alive); // Passando a característica do pai
         this.walking = walking;
         this.breasts = breasts;
     }
@@ -33,5 +33,8 @@ public class Dog extends Animal implements Terrestrial, Mammal {
     public int getNumberOfBreasts() {
         return breasts;
     }
-    
+    @Override
+    public String toString() {
+        return getSpecies() + " e está vivo? " + this.isAlive();
+    }
 }

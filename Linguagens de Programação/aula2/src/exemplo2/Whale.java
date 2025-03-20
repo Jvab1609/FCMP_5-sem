@@ -14,7 +14,7 @@ public class Whale extends Animal implements Mammal, Aquatic {
     private int breasts;
 
     public Whale(boolean swimming, int breasts, boolean alive) {
-        super(alive); // Passando a caracterÃ­stica do pai
+        super(alive); // Passando a característica do pai
         this.swimming = swimming;
         this.breasts = breasts;
     }

@@ -18,7 +18,7 @@ public class Main {
         
         for (int i = 0; i < animals.length; i++) {
             System.out.println(animals[i].isAlive() + "\t" + animals[i].getSpecies());
-            System.out.println(animals[i].getClass().getName() + "\t" + animals[i].getSpecies());
+            //System.out.println(animals[i].getClass().getName() + "\t" + animals[i].getSpecies());
         }
         
         Terrestrial terrestrials[] = {
@@ -27,8 +27,13 @@ public class Main {
         };
         for (int i = 0; i < terrestrials.length; i++) {
             System.out.println(terrestrials[i].isWalking()); 
-            // Nesse caso, nÃ£o estou olhando como um animal, e sim como um terrestre. Por isso, nÃ£o posso acessar o isAlive()
+            // Nesse caso, não estou olhando como um animal, e sim como um terrestre. Por isso, não posso acessar o isAlive()
         }
+        
+        Dog d = new Dog(true, 2, true);
+        System.out.println(d); // getString() reimplementado
+        Whale w = new Whale(true, 2, true);
+        System.out.println(w);
         
     }
 }
