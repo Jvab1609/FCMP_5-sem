@@ -13,12 +13,12 @@ import java.util.ArrayList;
 public class ProgramacaoOrientadaObjetosI extends ProgramacaoOrientadaObjetos {
 
     public ProgramacaoOrientadaObjetosI() {
-        this.notas = new ArrayList<>();
-        this.locais = new ArrayList<>();
+        //super();
     }
     
     @Override
     public void definirTrabalho(String tema) {
-        super.definirTrabalho(tema + " I");
+        super.definirTrabalho(tema + " (POO I)");
+        System.out.println("Tema definido para POO I");
     }
 }

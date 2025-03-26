@@ -14,8 +14,7 @@ import java.util.List;
 public class RedesComputadores extends Disciplina implements Teorica, Pratica {
 
     public RedesComputadores() {
-        this.notas = new ArrayList<>();
-        this.locais = new ArrayList<>();
+        //super();
     }
     
     @Override
@@ -30,7 +29,7 @@ public class RedesComputadores extends Disciplina implements Teorica, Pratica {
 
     @Override
     public String reservarLaboratorio() {
-        return "Laboratório 3 reservado para aula de Redes";
+        return "Laboratorio 3 reservado para aula de Redes";
     }
     
 }

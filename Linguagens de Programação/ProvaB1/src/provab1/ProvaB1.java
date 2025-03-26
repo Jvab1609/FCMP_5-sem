@@ -16,8 +16,16 @@ public class ProvaB1 {
     public static void main(String[] args) {
         // TODO code application logic here
         RedesComputadores r = new RedesComputadores();
-        r.addLocal("asd");
-        System.out.println(r.getLocais());
+        ProgramacaoOrientadaObjetos p = new ProgramacaoOrientadaObjetos();
+        ProgramacaoOrientadaObjetos pI = new ProgramacaoOrientadaObjetosI();
+        System.out.println(r.reservarSala());
+        System.out.println(p.reservarLaboratorio());
+        p.definirTrabalho("Classes em Java", 0.3);
+        pI.definirTrabalho("Encapsulamento");
+        
+        r.addLocal("Sala 101");
+        r.addLocal("Lab 3");
+        System.out.println("Locais de Redes: " + r.getLocais());
     }
     
 }

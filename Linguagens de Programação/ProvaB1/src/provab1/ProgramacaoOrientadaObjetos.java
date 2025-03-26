@@ -12,34 +12,36 @@ import java.util.ArrayList;
  */
 public class ProgramacaoOrientadaObjetos extends Disciplina implements Pratica {
     private String tema;
-    private double peso;
-
+    //private double peso;
+    
     public ProgramacaoOrientadaObjetos() {
-        this.notas = new ArrayList<>();
-        this.locais = new ArrayList<>();
+        //super();
     }
     
     public void definirTrabalho(String tema) {
         this.tema = tema;
+        System.out.println("Tema do trabalho de POO: " + tema);
     }
     public void definirTrabalho(String tema, double peso) {
         this.tema = tema;
-        this.peso = peso;
+        //this.peso = peso;
+        System.out.println("Tema do trabalho de POO: " + tema + ", com peso " + String.valueOf(peso));
     }
 
     @Override
     public double calcularMedia() {
-        if (peso != 0) {
-            return 6.0 * peso;
-        }
-        else {
-            return 6.0;
-        }
+//        if (peso != 0) {
+//            return 6.0 * peso;
+//        }
+//        else {
+//            return 6.0;
+//        }
+        return 7.0;
     }
     
     @Override
     public String reservarLaboratorio() {
-        return "Laboratório 4 reservado para aula de Linguagens";
+        return "Laboratorio 4 reservado para aula de POO";
     }
     
 }
