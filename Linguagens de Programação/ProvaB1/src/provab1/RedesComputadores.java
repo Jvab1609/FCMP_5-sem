@@ -4,6 +4,9 @@
  */
 package provab1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author jvalb
@@ -11,6 +14,8 @@ package provab1;
 public class RedesComputadores extends Disciplina implements Teorica, Pratica {
 
     public RedesComputadores() {
+        this.notas = new ArrayList<>();
+        this.locais = new ArrayList<>();
     }
     
     @Override

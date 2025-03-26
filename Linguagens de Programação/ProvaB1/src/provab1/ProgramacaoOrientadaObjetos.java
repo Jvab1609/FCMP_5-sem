@@ -4,6 +4,8 @@
  */
 package provab1;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jvalb
@@ -13,6 +15,8 @@ public class ProgramacaoOrientadaObjetos extends Disciplina implements Pratica {
     private double peso;
 
     public ProgramacaoOrientadaObjetos() {
+        this.notas = new ArrayList<>();
+        this.locais = new ArrayList<>();
     }
     
     public void definirTrabalho(String tema) {

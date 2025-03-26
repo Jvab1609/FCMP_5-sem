@@ -13,13 +13,8 @@ import java.util.ArrayList;
  */
 public abstract class Disciplina {
     private int codigo;
-    private List<String> locais;
-    private List<Double> notas;
-    
-    public Disciplina() {
-        this.notas = new ArrayList<>();
-        this.locais = new ArrayList<>();
-    }
+    protected List<String> locais;
+    protected List<Double> notas;
     
     public int getCodigo() {
         return codigo;
