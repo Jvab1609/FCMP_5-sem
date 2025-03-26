@@ -4,6 +4,8 @@
  */
 package provab1;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jvalb
@@ -11,6 +13,8 @@ package provab1;
 public class ProgramacaoOrientadaObjetosI extends ProgramacaoOrientadaObjetos {
 
     public ProgramacaoOrientadaObjetosI() {
+        this.notas = new ArrayList<>();
+        this.locais = new ArrayList<>();
     }
     
     @Override
