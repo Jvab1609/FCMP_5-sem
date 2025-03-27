@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class ProgramacaoOrientadaObjetosI extends ProgramacaoOrientadaObjetos {
 
     public ProgramacaoOrientadaObjetosI() {
-        //super();
     }
     
     @Override

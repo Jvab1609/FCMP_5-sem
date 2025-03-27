@@ -12,10 +12,7 @@ import java.util.ArrayList;
  */
 public class ProgramacaoOrientadaObjetos extends Disciplina implements Pratica {
     private String tema;
-    //private double peso;
-    
     public ProgramacaoOrientadaObjetos() {
-        //super();
     }
     
     public void definirTrabalho(String tema) {
@@ -24,18 +21,11 @@ public class ProgramacaoOrientadaObjetos extends Disciplina implements Pratica {
     }
     public void definirTrabalho(String tema, double peso) {
         this.tema = tema;
-        //this.peso = peso;
         System.out.println("Tema do trabalho de POO: " + tema + ", com peso " + String.valueOf(peso));
     }
 
     @Override
     public double calcularMedia() {
-//        if (peso != 0) {
-//            return 6.0 * peso;
-//        }
-//        else {
-//            return 6.0;
-//        }
         return 7.0;
     }
     

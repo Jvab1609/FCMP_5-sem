@@ -13,13 +13,8 @@ import java.util.ArrayList;
  */
 public abstract class Disciplina {
     private int codigo;
-    private List<String> locais;
-    private List<Double> notas;
-    
-    public Disciplina() {
-        this.notas = new ArrayList<>();
-        this.locais = new ArrayList<>();
-    }
+    private List<String> locais = new ArrayList<>();
+    private List<Double> notas = new ArrayList<>();
     
     public int getCodigo() {
         return codigo;
@@ -38,11 +33,5 @@ public abstract class Disciplina {
     }
 
     public abstract double calcularMedia();
-    
-    
-    
-
-    
-    
          
 }

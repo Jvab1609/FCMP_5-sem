@@ -14,7 +14,6 @@ import java.util.List;
 public class RedesComputadores extends Disciplina implements Teorica, Pratica {
 
     public RedesComputadores() {
-        //super();
     }
     
     @Override
