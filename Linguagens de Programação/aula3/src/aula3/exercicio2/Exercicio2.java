@@ -91,16 +91,40 @@ public class Exercicio2 extends javax.swing.JFrame {
     private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
         int tecla = evt.getKeyCode();
         switch(tecla) {
-            case KeyEvent.VK_UP: y-=d;
+            case KeyEvent.VK_UP: 
+                if (y > 0) {
+                    y-=d;
+                }
                 break;
-            case KeyEvent.VK_DOWN: y+=d;
+            case KeyEvent.VK_DOWN: 
+                if (y < jPanel1.getHeight() - s) {
+                    
+                    System.out.println(jPanel1.getHeight());
+                    y+=d;
+                }
+                System.out.println(y);
                 break;
-            case KeyEvent.VK_LEFT: x-=d;
+            case KeyEvent.VK_LEFT:
+                if (x > 0) {
+                    x-=d;
+                }
                 break;
-            case KeyEvent.VK_RIGHT: x+=d;
+            case KeyEvent.VK_RIGHT:
+                if (x < jPanel1.getWidth() - s) {
+                    x+=d;
+                }
                 break;
         }
         this.repaint();
+        // Tratar colisão
+        // Variar velocidade (Aumentar = S; Diminuir = X) 
+        // Variar tamanho (Aumentar = A; Diminuit = Z)
+        // Tratar a colisão depois de modificar
+            // jPanel1.getWidth e Height
+        // Repintar
+        // Criar uma segunda bolinha controlada pelo computador, por thread
+            // A cada execução do thread (0.5s), sortear: se vai aumentar/diminuir/manter tamanho e velocidade; direção/sentido do movimento; + controlar colisão
+            
     }//GEN-LAST:event_jPanel1KeyPressed
 
     /**
