@@ -1,12 +1,14 @@
+// PSEUDOCÃ“DIGO
+
 #define N 5 			/* number of philosophers */
-#define LEFT (i+N-1)%N 		/* number of i’s left neighbor */
-#define RIGHT (i+1)%N 		/* number of i’s right neighbor */
+#define LEFT (i+N-1)%N 		/* number of iâ€™s left neighbor */
+#define RIGHT (i+1)%N 		/* number of iâ€™s right neighbor */
 #define THINKING 0 		/* philosopher is thinking */
 #define HUNGRY 1 		/* philosopher is trying to get for ks */
 #define EATING 2 		/* philosopher is eating */
 
 typedef int semaphore; 		/* semaphores are a special kind of int */
-int state[N]; 			/* array to keep track of everyone’s state */
+int state[N]; 			/* array to keep track of everyoneâ€™s state */
   semaphore mutex = 1; 		/* mutual exclusion for critical regions */
   semaphore s[N]; 		/* one semaphore per philosopher */
 
