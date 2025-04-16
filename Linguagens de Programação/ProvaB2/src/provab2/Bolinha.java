@@ -53,7 +53,6 @@ public class Bolinha {
         int[] coordenadas = {x, y};
         return coordenadas;
     }
-    
 
     public void setS(int s) {
         this.s = s;
