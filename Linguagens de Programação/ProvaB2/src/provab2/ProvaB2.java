@@ -44,8 +44,7 @@ public class ProvaB2 extends javax.swing.JFrame {
             while (true) {
                 int height = jPanel1.getHeight();
                 int width = jPanel1.getWidth();
-                int i = (int) (Math.random()*(7-0 + 1) + 0);
-                int l = (int) (Math.random()*(50-1 + 1) + 1);
+                int i = (int) (Math.random()*(1250-0 + 1) + 0);
 //                for (int j = 0; j < l; j++) {
 //                    comp.processarInput(i, height, width);
 //                }

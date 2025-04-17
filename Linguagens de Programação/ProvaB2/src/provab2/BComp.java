@@ -21,48 +21,48 @@ public class BComp extends Bolinha {
         int x = this.getX();
         int y = this.getY();
         
-        switch(tecla) {
-            case 0: 
-                y-=d;
-                this.setY(y);
-                break;
-            case 1: 
-                y+=d;
-                this.setY(y);
-                break;
-            case 2:
-                x-=d;
-                this.setX(x);
-                break;
-            case 3:
-                x+=d;
-                this.setX(x);
-                break;
-            case 4:
-                if (d < 20) {
-                    d++;
-                    this.setD(d);
-                }
-                break;
-            case 5:
-                if (d > 1) {
-                    d--;
-                    this.setD(d);
-                }
-                break;     
-            case 6:
-                if (s < 100) { 
-                    s++;
-                    this.setS(s);
-                }
-                break;
-            case 7:
-                if (s > 1) {
-                    s--;
-                    this.setS(s);
-                }
-                break;                 
+       
+        if (tecla < 200) {
+            y-=d;
+            this.setY(y);
         }
+        else if (tecla >= 200 && tecla < 400) {
+            y+=d;
+            this.setY(y);
+        }
+        else if (tecla >= 400 && tecla < 600) {
+            x-=d;
+            this.setX(x);
+        }
+        else if (tecla >= 600 && tecla < 800) {
+            x+=d;
+            this.setX(x);
+        }
+        else if (tecla >= 800 && tecla < 950) {
+            if (d < 20) {
+                d++;
+                this.setD(d);
+            }
+        }
+        else if (tecla >= 950 && tecla < 1050) {
+            if (d > 1) {
+                d--;
+                this.setD(d);
+            }
+        }    
+        else if (tecla >= 1050 && tecla < 1150) {
+            if (s < 100) { 
+                s++;
+                this.setS(s);
+            }
+        }
+        else {
+            if (s > 1) {
+                s--;
+                this.setS(s);
+            }
+        }
+        
         checarColisao(x, y, height, width);
     }
 
