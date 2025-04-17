@@ -8,7 +8,7 @@ package provab2;
  *
  * @author jvalb
  */
-public class BComp extends Bolinha implements Runnable {
+public class BComp extends Bolinha {
 
     public BComp(int s, int d, int x, int y) {
         super(s, d, x, y);
@@ -66,9 +66,10 @@ public class BComp extends Bolinha implements Runnable {
         checarColisao(x, y, height, width);
     }
 
-    @Override
     public void run() {
-        
+        while (true) {
+            
+        }
     }
                 
     

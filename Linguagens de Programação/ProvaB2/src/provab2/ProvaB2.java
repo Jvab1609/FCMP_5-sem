@@ -32,10 +32,35 @@ public class ProvaB2 extends javax.swing.JFrame {
     public ProvaB2() {
         initComponents();
         jPanel1.requestFocus();
+        new Thread(comportamentoComp).start();
     }
     
     BPlayer player = new BPlayer(s, d, x, y);
     BComp comp = new BComp(s, d, xC, yC);
+    
+    Runnable comportamentoComp = new Runnable() {
+        @Override
+        public void run() {
+            while (true) {
+                int height = jPanel1.getHeight();
+                int width = jPanel1.getWidth();
+                int i = (int) (Math.random()*(7-0 + 1) + 0);
+                int l = (int) (Math.random()*(50-1 + 1) + 1);
+//                for (int j = 0; j < l; j++) {
+//                    comp.processarInput(i, height, width);
+//                }
+                comp.processarInput(i, height, width);
+                jPanel1.repaint();
+                try {
+                    int t = (int) (Math.random()*(100-50 + 1) + 50);
+                    Thread.sleep(t); // Sleep, por si só, não funciona porque é específico de Thread. Preciso colocar Thread. na frente
+                } catch (InterruptedException ex) {
+                }
+            }
+        }
+    };
+    
+    
     
 //    private void pintaBolinha(Graphics g) {
 //        g.setColor(Color.GREEN);
