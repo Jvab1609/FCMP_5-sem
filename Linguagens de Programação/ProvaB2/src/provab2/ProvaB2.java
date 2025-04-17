@@ -3,6 +3,8 @@ package provab2;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /*
@@ -45,13 +47,20 @@ public class ProvaB2 extends javax.swing.JFrame {
                 int height = jPanel1.getHeight();
                 int width = jPanel1.getWidth();
                 int i = (int) (Math.random()*(1250-0 + 1) + 0);
-//                for (int j = 0; j < l; j++) {
-//                    comp.processarInput(i, height, width);
-//                }
-                comp.processarInput(i, height, width);
-                jPanel1.repaint();
+                int l = (int) (Math.random()*(30-1 + 1) + 1);
+                for (int j = 0; j < l; j++) {
+                    comp.processarInput(i, height, width);
+                    jPanel1.repaint();
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(ProvaB2.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                //comp.processarInput(i, height, width);
+                
                 try {
-                    int t = (int) (Math.random()*(100-50 + 1) + 50);
+                    int t = (int) (Math.random()*(600-500 + 1) + 500);
                     Thread.sleep(t); // Sleep, por si só, não funciona porque é específico de Thread. Preciso colocar Thread. na frente
                 } catch (InterruptedException ex) {
                 }
