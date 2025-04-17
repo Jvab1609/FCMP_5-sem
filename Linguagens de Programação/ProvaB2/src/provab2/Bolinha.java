@@ -26,8 +26,8 @@ public abstract class Bolinha {
         this.y = y;
     }
     
-    public void pintaBolinha(Graphics g) {
-        g.setColor(Color.GREEN);
+    public void pintaBolinha(Graphics g, Color cor) {
+        g.setColor(cor);
         g.fillOval(x, y, s, s);
         //jPanel1.paint(g); // Cada vez que a janela der refresh, vai pintar
     }

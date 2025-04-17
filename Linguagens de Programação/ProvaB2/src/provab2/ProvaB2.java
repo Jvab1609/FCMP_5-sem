@@ -18,9 +18,14 @@ public class ProvaB2 extends javax.swing.JFrame {
     
     int s = 20;
     int d = 5;
-    int x = 250;
+    int x = 200;
     int y = 200;
+    Color playerColor = Color.GREEN;
     
+    
+    int xC = 250;
+    int yC = 250;
+    Color compColor = Color.RED;
     /**
      * Creates new form Exercicio2
      */
@@ -29,8 +34,8 @@ public class ProvaB2 extends javax.swing.JFrame {
         jPanel1.requestFocus();
     }
     
-    Bolinha player = new BPlayer(s, d, x, y);
-    
+    BPlayer player = new BPlayer(s, d, x, y);
+    BComp comp = new BComp(s, d, xC, yC);
     
 //    private void pintaBolinha(Graphics g) {
 //        g.setColor(Color.GREEN);
@@ -51,12 +56,12 @@ public class ProvaB2 extends javax.swing.JFrame {
         jPanel1 = new JPanel() {
             public void paint(Graphics g) {
                 super.paint(g);
-                player.pintaBolinha(g);
+                player.pintaBolinha(g, playerColor);
+                comp.pintaBolinha(g, compColor);
             }
         };
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.addKeyListener(new java.awt.event.KeyAdapter() {
