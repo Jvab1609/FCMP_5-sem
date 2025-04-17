@@ -12,7 +12,7 @@ import java.awt.Graphics;
  * @author jvalb
  */
 
-public class Bolinha {
+public abstract class Bolinha {
     
     private int s;
     private int d;
@@ -69,5 +69,23 @@ public class Bolinha {
     public void setY(int y) {
         this.y = y;
     }
+
+    public int getS() {
+        return s;
+    }
+
+    public int getD() {
+        return d;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public abstract void processarInput(int tecla, int height, int width);
     
 }

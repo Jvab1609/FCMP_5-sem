@@ -29,7 +29,7 @@ public class ProvaB2 extends javax.swing.JFrame {
         jPanel1.requestFocus();
     }
     
-    Bolinha player = new Bolinha(s, d, x, y);
+    Bolinha player = new BPlayer(s, d, x, y);
     
     
 //    private void pintaBolinha(Graphics g) {
@@ -95,70 +95,7 @@ public class ProvaB2 extends javax.swing.JFrame {
         int height = jPanel1.getHeight();
         int width = jPanel1.getWidth();
         
-        switch(tecla) {
-            case KeyEvent.VK_UP: 
-                y-=d;
-                player.setY(y);
-                break;
-            case KeyEvent.VK_DOWN: 
-                y+=d;
-                player.setY(y);
-                break;
-            case KeyEvent.VK_LEFT:
-                x-=d;
-                player.setX(x);
-                break;
-            case KeyEvent.VK_RIGHT:
-                x+=d;
-                player.setX(x);
-                break;
-            case KeyEvent.VK_S:
-                if (d < 20) {
-                    d++;
-                    player.setD(d);
-                }
-                break;
-            case KeyEvent.VK_X:
-                if (d > 1) {
-                    d--;
-                    player.setD(d);
-                }
-                break;     
-            case KeyEvent.VK_A:
-                if (s < 100) { 
-                    // Tratar colisão por estados => ex: estado de mudar de tamanho, faz esse tratamento
-                    // Parâmetros: int estado, int height int width
-//                    if (y <= 0) {;
-//                        y++;
-//                        player.setY(y);
-//                    }
-//                    else if (y >= height - s) {
-//                        y--;
-//                        player.setY(y);
-//                    }
-//                    if (x <= 0) {
-//                        x++;
-//                        player.setX(x);
-//                    }
-//                    else if (x >= width - s) {
-//                        x--;
-//                        player.setX(x);
-//                    }
-                    s++;
-                    player.setS(s);
-                }
-                break;
-            case KeyEvent.VK_Z:
-                if (s > 1) {
-                    s--;
-                    player.setS(s);
-                }
-                break;
-        }
-        
-        int[] check = player.checarColisao(x, y, height, width);
-        x = check[0];
-        y = check[1];
+        player.processarInput(tecla, height, width);
         
         this.repaint();
         // Tratar colis�o
