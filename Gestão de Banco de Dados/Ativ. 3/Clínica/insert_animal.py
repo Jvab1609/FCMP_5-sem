@@ -13,7 +13,11 @@ data = [
      f"nome_{i}", 
      f"{random.randint(1999, 2024)}-{random.randint(1, 12)}-{random.randint(1, 28)}",
      f"especie_{i}",
-     f"raca_{i}"
+     f"raca_{i}",
+     f"porte_{i}",
+     random.randint(5, 40),
+     f"obs_{i}",
+     0
     )
     for i in range(1, 100001)]  # Example data
 print(len(data))
