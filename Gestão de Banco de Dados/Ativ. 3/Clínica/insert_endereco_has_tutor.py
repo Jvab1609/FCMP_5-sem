@@ -11,10 +11,7 @@ batch_size = 1
 data = [
     (i, 
      i,
-     f"rua_{i}",
-     f"bairro_{i}",
-     f"cidade_{i}",
-     f"SP"
+     i
     )
     for i in range(1, 100001)]  # Example data
 print(len(data))
@@ -23,8 +20,8 @@ for i in range(0, len(data), batch_size):
     cursor.execute("START TRANSACTION")
     conn.commit()
     cursor.executemany(
-        "INSERT INTO endereco (cep, num_end, rua, bairro, cidade, estado)" \
-        "VALUES (%s, %s, %s, %s, %s, %s)", batch)
+        "INSERT INTO endereco_has_tutor (endereco_cep, endereco_num_end, tutor_id_tutor)" \
+        "VALUES (%s, %s, %s)", batch)
     conn.commit()
     cursor.execute("COMMIT")
     conn.commit()
