@@ -5,6 +5,7 @@ conn = mysql.connector.connect(user='dba_clinica', password='dba#1609', host='lo
 cursor = conn.cursor()
 
 cursor.execute("SET foreign_key_checks = 0")
+conn.commit()
 
 batch_size = 1
 data = [
@@ -20,15 +21,17 @@ print(len(data))
 for i in range(0, len(data), batch_size):
     batch = data[i:i+batch_size]
     cursor.execute("START TRANSACTION")
+    conn.commit()
     cursor.executemany(
         "INSERT INTO tutor (id_tutor, cpf_tutor, nome_tutor, data_nasc_tutor, email_tutor, excluido, login_tutor, senha_tutor) " \
         "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)", batch)
     conn.commit()
     cursor.execute("COMMIT")
-# INSERT INTO tutor (cpf_tutor, nome_tutor, data_nasc_tutor, email_tutor, excluido, login_tutor, senha_tutor)
-# VALUES ('12345678901', 'João Silva', '1980-01-01', 'joao@email.com', 0, 'joaos', 'senha123');
+    conn.commit()
+    print(i)
 
 cursor.execute("SET foreign_key_checks = 1")
+conn.commit()
 
 cursor.close()
 conn.close()
