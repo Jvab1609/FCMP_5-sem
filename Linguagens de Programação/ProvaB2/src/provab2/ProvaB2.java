@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  *
  * @author 202310501
  */
-public class ProvaB2 extends javax.swing.JFrame {
+public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener {
     
     int s = 20;
     int d = 5;
@@ -38,19 +38,39 @@ public class ProvaB2 extends javax.swing.JFrame {
     }
     
     BPlayer player = new BPlayer(s, d, x, y);
-    BComp comp = new BComp(s, d, xC, yC);
+    BComp comp = new BComp(s, d, xC, yC, this);
+    
+    boolean colidiu = false;
+    
+    @Override
+    public void messageArrived(MessageEvent e) {
+        colidiu = true;
+    }
+    
+    
     
     Runnable comportamentoComp = new Runnable() {
         @Override
         public void run() {
             while (true) {
+                int soma = 0;
+                int[] probs = comp.getProbs();
+                for (int i = 0; i < probs.length; i++) {
+                    soma += probs[i];
+                }
+                
                 int height = jPanel1.getHeight();
                 int width = jPanel1.getWidth();
-                int i = (int) (Math.random()*(1250-0 + 1) + 0);
-                int l = (int) (Math.random()*(30-1 + 1) + 1);
+                int l = (int) (Math.random()*(50-1 + 1) + 1);
+                int tecla = (int) (Math.random()*(soma-0 + 1) + 0);
                 for (int j = 0; j < l; j++) {
-                    comp.processarInput(i, height, width);
+                    comp.processarInput(tecla, height, width);
                     jPanel1.repaint();
+                    if (colidiu == true) {
+                        j = 51;
+                        System.out.println("COLIDIU");
+                        colidiu = false;
+                    }
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException ex) {
@@ -188,4 +208,6 @@ public class ProvaB2 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    
 }

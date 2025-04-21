@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
  * @author jvalb
  */
 public class BPlayer extends Bolinha {
-
+    
     public BPlayer(int s, int d, int x, int y) {
         super(s, d, x, y);
     }
@@ -54,24 +54,6 @@ public class BPlayer extends Bolinha {
                 break;     
             case KeyEvent.VK_A:
                 if (s < 100) { 
-                    // Tratar colisão por estados => ex: estado de mudar de tamanho, faz esse tratamento
-                    // Parâmetros: int estado, int height int width
-//                    if (y <= 0) {;
-//                        y++;
-//                        player.setY(y);
-//                    }
-//                    else if (y >= height - s) {
-//                        y--;
-//                        player.setY(y);
-//                    }
-//                    if (x <= 0) {
-//                        x++;
-//                        player.setX(x);
-//                    }
-//                    else if (x >= width - s) {
-//                        x--;
-//                        player.setX(x);
-//                    }
                     s++;
                     this.setS(s);
                 }

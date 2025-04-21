@@ -32,26 +32,28 @@ public abstract class Bolinha {
         //jPanel1.paint(g); // Cada vez que a janela der refresh, vai pintar
     }
     
-    public int[] checarColisao(int x, int y, int height, int width) {
+    public boolean checarColisao(int x, int y, int height, int width) {
         int s = this.s;     
-        if (y < 0) {
+        if (y <= 0) {
             y = 0;
             this.setY(y);
         }
-        else if (y > height - s) {
+        else if (y >= height - s) {
             y = height - s;
             this.setY(y);
         }
-        if (x < 0) {
+        if (x <= 0) {
             x = 0;
             this.setX(x);
         }
-        else if (x > width - s) {
+        else if (x >= width - s) {
             x = width - s;
             this.setX(x);
         }
-        int[] coordenadas = {x, y};
-        return coordenadas;
+        else {
+            return false;
+        }
+        return true;
     }
 
     public void setS(int s) {
