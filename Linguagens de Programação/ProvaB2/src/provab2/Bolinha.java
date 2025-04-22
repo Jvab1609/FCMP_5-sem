@@ -39,14 +39,15 @@ public abstract class Bolinha {
             this.setY(y);
         }
         else if (y >= height - s) {
+            System.out.println(y);
             y = height - s;
             this.setY(y);
         }
-        if (x <= 0) {
+        if (x < 0) {
             x = 0;
             this.setX(x);
         }
-        else if (x >= width - s) {
+        else if (x > width - s) {
             x = width - s;
             this.setX(x);
         }

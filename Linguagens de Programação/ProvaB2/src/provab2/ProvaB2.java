@@ -25,8 +25,8 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
     Color playerColor = Color.GREEN;
     
     
-    int xC = 250;
-    int yC = 250;
+    int xT = 250;
+    int yT = 250;
     Color compColor = Color.RED;
     /**
      * Creates new form Exercicio2
@@ -38,7 +38,7 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
     }
     
     BPlayer player = new BPlayer(s, d, x, y);
-    BComp comp = new BComp(s, d, xC, yC, this);
+    BComp comp = new BComp(s, d, xT, yT, this);
     
     boolean colidiu = false;
     
@@ -154,7 +154,9 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
         int width = jPanel1.getWidth();
         
         player.processarInput(tecla, height, width);
-        
+        System.out.println("H: " + height + "\tW: " + width);
+        System.out.println("X: " + comp.getX() + "\tY: " + comp.getY() + "\tS: " + comp.getS());
+        System.out.println(comp.strProbs());
         this.repaint();
         // Tratar colis�o
         // Variar velocidade (Aumentar = S; Diminuir = X) 

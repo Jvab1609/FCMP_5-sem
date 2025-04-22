@@ -14,7 +14,7 @@ public class BComp extends Bolinha {
 
     private ProvaB2 ouvinte;
     
-    private int[] probs = {300, 300, 300, 300, 200, 150, 150, 150};
+    private int[] probs = {300, 300, 300, 300, 200, 200, 200, 200};
     
     
     
@@ -66,7 +66,9 @@ public class BComp extends Bolinha {
             }
             else {
                 ouvinte.messageArrived(evento);
-                probs[4] -= 50;
+                if (probs[4] >= 100) {
+                    probs[4] -= 50;
+                }
                 probs[5] += 50;
             }
         }
@@ -79,7 +81,9 @@ public class BComp extends Bolinha {
             else {
                 ouvinte.messageArrived(evento);
                 probs[4] += 50;
-                probs[5] -= 50;
+                if (probs[5] >= 100) {
+                    probs[5] -= 50;
+                }
             }
         }    
         else if (tecla >= probs[0] + probs[1] + probs[2] + probs[3] + probs[4] + probs[5] && tecla < probs[0] + probs[1] + probs[2] + probs[3] + probs[4] + probs[5] + probs[7]) {
@@ -90,7 +94,9 @@ public class BComp extends Bolinha {
             }
             else {
                 ouvinte.messageArrived(evento);
-                probs[6] -= 50;
+                if (probs[6] >= 100) {
+                    probs[6] -= 50;
+                }    
                 probs[7] += 50;
             }
         }
@@ -103,70 +109,42 @@ public class BComp extends Bolinha {
             else {
                 ouvinte.messageArrived(evento);
                 probs[6] += 50;
-                probs[7] -= 50;
+                if (probs[7] >= 100) {
+                    probs[7] -= 50;
+                }
             }
         }
-
-        
-//        switch(tecla) {;
-//            case 1: 
-//                y-=d;
-//                this.setY(y);
-//                break;
-//            case 2: 
-//                y+=d;
-//                this.setY(y);
-//                break;
-//            case 3:
-//                x-=d;
-//                this.setX(x);
-//                break;
-//            case 4:
-//                x+=d;
-//                this.setX(x);
-//                break;
-//            case 5:
-//                if (d < 20) {
-//                    d++;
-//                    this.setD(d);
-//                }
-//                break;
-//            case 6:
-//                if (d > 1) {
-//                    d--;
-//                    this.setD(d);
-//                }
-//                break;     
-//            case 7:
-//                if (s < 100) { 
-//                    s++;
-//                    this.setS(s);
-//                }
-//                break;
-//            case 8:
-//                if (s > 1) {
-//                    s--;
-//                    this.setS(s);
-//                }
-//                break;                 
-//        }
 
         if (checarColisao(x, y, height, width)) { 
             ouvinte.messageArrived(evento);
             System.out.println("CHECOU");
-            for (int i = 0; i < 4; i++) {
-                if (i != mov) {
-                    probs[i] += 50;
-                }
-                else {
-                    probs[i] -= 50;
-                }
+            
+            if (probs[mov] >= 100) {
+                probs[mov] -= 50;
+            }
+            
+            if (mov % 2 == 0) {
+                probs[mov + 1] += 50;
+            }
+            else {
+                probs[mov - 1] += 50;
             }
         }
     }
 
     public int[] getProbs() {
         return probs;
+    }
+    
+    public String strProbs() {
+        String string = "";
+        for (int i = 0; i < probs.length; i++) {
+            string += String.valueOf(probs[i]);
+            if (i < probs.length - 1) {
+                string += " ";
+            }
+        }
+        return string;
     }
                
 }
