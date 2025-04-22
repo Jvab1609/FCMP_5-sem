@@ -36,12 +36,18 @@ public class BComp extends Bolinha {
        
         if (tecla < probs[0]) {
             y-=d;
+            //ouvinte.messageArrived(evento);
+           
             this.setY(y);
             mov = 0;
             System.out.println("CIMA");
         }
         else if (tecla >= probs[0] && tecla < probs[0] + probs[1]) {
             y+=d;
+            
+            //ouvinte.messageArrived(evento);
+            
+            
             this.setY(y);
             mov = 1;
             System.out.println("BAIXO");
@@ -66,9 +72,8 @@ public class BComp extends Bolinha {
             }
             else {
                 ouvinte.messageArrived(evento);
-                if (probs[4] >= 100) {
-                    probs[4] -= 50;
-                }
+                probs[4] -= 50;
+                
                 probs[5] += 50;
             }
         }
@@ -81,12 +86,10 @@ public class BComp extends Bolinha {
             else {
                 ouvinte.messageArrived(evento);
                 probs[4] += 50;
-                if (probs[5] >= 100) {
-                    probs[5] -= 50;
-                }
+                probs[5] -= 50;
             }
         }    
-        else if (tecla >= probs[0] + probs[1] + probs[2] + probs[3] + probs[4] + probs[5] && tecla < probs[0] + probs[1] + probs[2] + probs[3] + probs[4] + probs[5] + probs[7]) {
+        else if (tecla >= probs[0] + probs[1] + probs[2] + probs[3] + probs[4] + probs[5] && tecla < probs[0] + probs[1] + probs[2] + probs[3] + probs[4] + probs[5] + probs[6]) {
             if (s < 100) { 
                 s++;
                 this.setS(s);
@@ -94,9 +97,7 @@ public class BComp extends Bolinha {
             }
             else {
                 ouvinte.messageArrived(evento);
-                if (probs[6] >= 100) {
-                    probs[6] -= 50;
-                }    
+                probs[6] -= 50;
                 probs[7] += 50;
             }
         }
@@ -109,9 +110,8 @@ public class BComp extends Bolinha {
             else {
                 ouvinte.messageArrived(evento);
                 probs[6] += 50;
-                if (probs[7] >= 100) {
-                    probs[7] -= 50;
-                }
+                probs[7] -= 50;
+                
             }
         }
 
@@ -119,9 +119,8 @@ public class BComp extends Bolinha {
             ouvinte.messageArrived(evento);
             System.out.println("CHECOU");
             
-            if (probs[mov] >= 100) {
-                probs[mov] -= 50;
-            }
+            probs[mov] -= 50;
+            
             
             if (mov % 2 == 0) {
                 probs[mov + 1] += 50;
@@ -130,6 +129,17 @@ public class BComp extends Bolinha {
                 probs[mov - 1] += 50;
             }
         }
+        
+        for (int i = 0; i < probs.length; i++) {
+            if (probs[i] > 500) {
+                probs[i] = 500;
+            }
+            else if (probs[i] < 50) {
+                probs[i] = 50;
+            }
+        }
+        
+        
     }
 
     public int[] getProbs() {

@@ -61,14 +61,15 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
                 
                 int height = jPanel1.getHeight();
                 int width = jPanel1.getWidth();
-                int l = (int) (Math.random()*(50-1 + 1) + 1);
+                int l = (int) (Math.random()*(40-1 + 1) + 1);
                 int tecla = (int) (Math.random()*(soma-0 + 1) + 0);
                 for (int j = 0; j < l; j++) {
                     comp.processarInput(tecla, height, width);
                     jPanel1.repaint();
                     if (colidiu == true) {
-                        j = 51;
+                        j = 41;
                         System.out.println("COLIDIU");
+                        System.out.println("X: " + comp.getX() + "\tY: " + comp.getY() + "\tS: " + comp.getS());
                         colidiu = false;
                     }
                     try {

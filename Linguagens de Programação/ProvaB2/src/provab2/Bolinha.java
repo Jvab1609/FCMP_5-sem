@@ -34,27 +34,30 @@ public abstract class Bolinha {
     
     public boolean checarColisao(int x, int y, int height, int width) {
         int s = this.s;     
-        if (y <= 0) {
+        if (y < 0) {
             y = 0;
             this.setY(y);
+            return true;
         }
-        else if (y >= height - s) {
+        else if (y > height - s) {
             System.out.println(y);
             y = height - s;
             this.setY(y);
+            return true;
         }
         if (x < 0) {
             x = 0;
             this.setX(x);
+            return true;
         }
         else if (x > width - s) {
             x = width - s;
             this.setX(x);
+            return true;
         }
         else {
             return false;
         }
-        return true;
     }
 
     public void setS(int s) {
