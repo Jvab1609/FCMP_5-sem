@@ -59,13 +59,13 @@ public class BPlayer extends Bolinha {
                 }
                 break;
             case KeyEvent.VK_Z:
-                if (s > 1) {
+                if (s > 2) { // Coloquei o mínimo como 2 porque com 1 a bolinha some
                     s--;
                     this.setS(s);
                 }
                 break;                 
         }
-        checarColisao(x, y, height, width);
+        checarColisao(x, y, height, width); // Método da superclasse que trata colisão
     }
                 
     

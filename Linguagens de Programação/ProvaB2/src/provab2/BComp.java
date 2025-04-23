@@ -23,6 +23,14 @@ public class BComp extends Bolinha {
         this.ouvinte = ouvinte;
     }
     
+    private int somaProbs(int i) {
+        int soma = 0;
+        for (int j = 0; j <= i; j++) {
+            soma += probs[i];
+        }
+        return soma;
+    }
+    
     @Override
     public void processarInput(int tecla, int height, int width) {
         int s = this.getS();
@@ -34,7 +42,7 @@ public class BComp extends Bolinha {
         
         MessageEvent evento = new MessageEvent(this, tecla-1);
        
-        if (tecla < probs[0]) {
+        if (tecla < somaProbs(0)) {
             y-=d;
             //ouvinte.messageArrived(evento);
            
@@ -42,7 +50,7 @@ public class BComp extends Bolinha {
             mov = 0;
             System.out.println("CIMA");
         }
-        else if (tecla >= probs[0] && tecla < probs[0] + probs[1]) {
+        else if (tecla >= somaProbs(0) && tecla < somaProbs(1)) {
             y+=d;
             
             //ouvinte.messageArrived(evento);
@@ -52,19 +60,19 @@ public class BComp extends Bolinha {
             mov = 1;
             System.out.println("BAIXO");
         }
-        else if (tecla >= probs[0] + probs[1] && tecla < probs[0] + probs[1] + probs[2]) {
+        else if (tecla >= somaProbs(1) && tecla < somaProbs(2)) {
             x-=d;
             this.setX(x);
             mov = 2;
             System.out.println("ESQ");
         }
-        else if (tecla >= probs[0] + probs[1] + probs[2] && tecla < probs[0] + probs[1] + probs[2] + probs[3]) {
+        else if (tecla >= somaProbs(2) && tecla < somaProbs(3)) {
             x+=d;
             this.setX(x);
             mov = 3;
             System.out.println("DIR");
         }
-        else if (tecla >= probs[0] + probs[1] + probs[2] + probs[3] && tecla < probs[0] + probs[1] + probs[2] + probs[3] + probs[4]) {
+        else if (tecla >= somaProbs(3) && tecla < somaProbs(4)) {
             if (d < 20) {
                 d++;
                 this.setD(d);
@@ -77,7 +85,7 @@ public class BComp extends Bolinha {
                 probs[5] += 50;
             }
         }
-        else if (tecla >= probs[0] + probs[1] + probs[2] + probs[3] + probs[4] && tecla < probs[0] + probs[1] + probs[2] + probs[3] + probs[4] + probs[5]) {
+        else if (tecla >= somaProbs(4) && tecla < somaProbs(5)) {
             if (d > 1) {
                 d--;
                 this.setD(d);
@@ -89,7 +97,7 @@ public class BComp extends Bolinha {
                 probs[5] -= 50;
             }
         }    
-        else if (tecla >= probs[0] + probs[1] + probs[2] + probs[3] + probs[4] + probs[5] && tecla < probs[0] + probs[1] + probs[2] + probs[3] + probs[4] + probs[5] + probs[6]) {
+        else if (tecla >= somaProbs(5) && tecla < somaProbs(6)) {
             if (s < 100) { 
                 s++;
                 this.setS(s);
@@ -102,7 +110,7 @@ public class BComp extends Bolinha {
             }
         }
         else {
-            if (s > 2) {
+            if (s > 2) { // Coloquei o mínimo como 2 porque com 1 a bolinha some
                 s--;
                 this.setS(s);
                 System.out.println("DIM");

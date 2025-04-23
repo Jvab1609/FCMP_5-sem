@@ -24,13 +24,12 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
     int y = 200;
     Color playerColor = Color.GREEN;
     
-    
-    int xT = 250;
-    int yT = 250;
+    int sT = (int) (Math.random()*(90-10 + 1) + 10);
+    int dT = (int) (Math.random()*(18-3 + 1) + 3);
+    int xT = (int) (Math.random()*(490-10 + 1) + 10);
+    int yT = (int) (Math.random()*(390-10 + 1) + 10);
     Color compColor = Color.RED;
-    /**
-     * Creates new form Exercicio2
-     */
+
     public ProvaB2() {
         initComponents();
         jPanel1.requestFocus();
@@ -38,7 +37,7 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
     }
     
     BPlayer player = new BPlayer(s, d, x, y);
-    BComp comp = new BComp(s, d, xT, yT, this);
+    BComp comp = new BComp(sT, dT, xT, yT, this);
     
     boolean colidiu = false;
     
@@ -73,30 +72,20 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
                         colidiu = false;
                     }
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(100); // dá um sleep de 0,1s porque senão os movimentos são instantâneos
                     } catch (InterruptedException ex) {
                         Logger.getLogger(ProvaB2.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                //comp.processarInput(i, height, width);
                 
                 try {
-                    int t = (int) (Math.random()*(600-500 + 1) + 500);
-                    Thread.sleep(t); // Sleep, por si só, não funciona porque é específico de Thread. Preciso colocar Thread. na frente
+                    int t = (int) (Math.random()*(600-500 + 1) + 500); // Faz o sleep de 0,5s ou um pouquinho mais
+                    Thread.sleep(t);
                 } catch (InterruptedException ex) {
                 }
             }
         }
     };
-    
-    
-    
-//    private void pintaBolinha(Graphics g) {
-//        g.setColor(Color.GREEN);
-//        g.fillOval(x, y, s, s);
-//        //jPanel1.paint(g); // Cada vez que a janela der refresh, vai pintar
-//    }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,19 +144,8 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
         int width = jPanel1.getWidth();
         
         player.processarInput(tecla, height, width);
-        System.out.println("H: " + height + "\tW: " + width);
-        System.out.println("X: " + comp.getX() + "\tY: " + comp.getY() + "\tS: " + comp.getS());
         System.out.println(comp.strProbs());
         this.repaint();
-        // Tratar colis�o
-        // Variar velocidade (Aumentar = S; Diminuir = X) 
-        // Variar tamanho (Aumentar = A; Diminuit = Z)
-        // Tratar a colis�o depois de modificar
-            // jPanel1.getWidth e Height
-        // Repintar
-        // Criar uma segunda bolinha controlada pelo computador, por thread
-            // A cada execu��o do thread (0.5s), sortear: se vai aumentar/diminuir/manter tamanho e velocidade; dire��o/sentido do movimento; + controlar colis�o
-            
     }//GEN-LAST:event_jPanel1KeyPressed
 
     /**
