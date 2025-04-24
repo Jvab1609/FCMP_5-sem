@@ -18,7 +18,7 @@ public abstract class Bolinha {
     private int d;
     private int x;
     private int y;
-
+    
     public Bolinha(int s, int d, int x, int y) {
         this.s = s;
         this.d = d;
@@ -32,29 +32,55 @@ public abstract class Bolinha {
         //jPanel1.paint(g); // Cada vez que a janela der refresh, vai pintar
     }
     
-    public boolean checarColisao(int x, int y, int height, int width) {
-        int s = this.s;     
+    public boolean checarColisao(int height, int width) {  
+        
         if (y < 0) {
             y = 0;
-            this.setY(y);
             return true;
         }
         else if (y > height - s) {
             System.out.println(y);
             y = height - s;
-            this.setY(y);
             return true;
         }
         if (x < 0) {
             x = 0;
-            this.setX(x);
             return true;
         }
         else if (x > width - s) {
             x = width - s;
-            this.setX(x);
             return true;
         }
+        
+//        else if (((hitbox[0] < hitboxOutra[1] && hitbox[0] > hitboxOutra[0]) ||
+//                (hitbox[1] > hitboxOutra[0] && hitbox[1] < hitboxOutra[1])) &&
+//                ((hitbox[2] < hitboxOutra[3] && hitbox[2] > hitboxOutra[2]) ||
+//                (hitbox[3] > hitboxOutra[2] && hitbox[3] < hitboxOutra[3]))) {
+//            
+//
+//            switch (mov) {
+//                case 0:
+//                    y = hitboxOutra[3] + 1;
+//                    break;
+//                case 1:
+//                    y = hitboxOutra[2] - s - 1;
+//                    break;
+//                case 2:
+//                    x = hitboxOutra[1] + 1;
+//                    break;
+//                case 3:
+//                    x = hitboxOutra[0] - s - 1;
+//                    break;
+//                case 5:
+//                    y = yAnt;
+//                    x = xAnt;
+//            }
+//            
+//            System.out.println("COLISÃO ENTRE");
+//            return true;
+//        }
+        
+        
         else {
             return false;
         }

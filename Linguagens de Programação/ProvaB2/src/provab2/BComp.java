@@ -38,6 +38,9 @@ public class BComp extends Bolinha {
         int x = this.getX();
         int y = this.getY();
         
+        //int[] novoHit = {x-1, x+s+1, y-1, y+s+1};
+        //setHitbox(novoHit);
+        
         int mov = 5;
         
         MessageEvent evento = new MessageEvent(this, tecla-1);
@@ -48,35 +51,31 @@ public class BComp extends Bolinha {
            
             this.setY(y);
             mov = 0;
-            System.out.println("CIMA");
+            //System.out.println("CIMA");
         }
         else if (tecla >= somaProbs(0) && tecla < somaProbs(1)) {
-            y+=d;
-            
-            //ouvinte.messageArrived(evento);
-            
-            
+            y+=d;          
             this.setY(y);
             mov = 1;
-            System.out.println("BAIXO");
+            //System.out.println("BAIXO");
         }
         else if (tecla >= somaProbs(1) && tecla < somaProbs(2)) {
             x-=d;
             this.setX(x);
             mov = 2;
-            System.out.println("ESQ");
+            //System.out.println("ESQ");
         }
         else if (tecla >= somaProbs(2) && tecla < somaProbs(3)) {
             x+=d;
             this.setX(x);
             mov = 3;
-            System.out.println("DIR");
+            //System.out.println("DIR");
         }
         else if (tecla >= somaProbs(3) && tecla < somaProbs(4)) {
             if (d < 20) {
                 d++;
                 this.setD(d);
-                System.out.println("ACEL");
+                //System.out.println("ACEL");
             }
             else {
                 ouvinte.messageArrived(evento);
@@ -89,7 +88,7 @@ public class BComp extends Bolinha {
             if (d > 1) {
                 d--;
                 this.setD(d);
-                System.out.println("DES");
+                //System.out.println("DES");
             }
             else {
                 ouvinte.messageArrived(evento);
@@ -101,7 +100,7 @@ public class BComp extends Bolinha {
             if (s < 100) { 
                 s++;
                 this.setS(s);
-                System.out.println("AUM");
+                //System.out.println("AUM");
             }
             else {
                 ouvinte.messageArrived(evento);
@@ -113,7 +112,7 @@ public class BComp extends Bolinha {
             if (s > 2) { // Coloquei o mínimo como 2 porque com 1 a bolinha some
                 s--;
                 this.setS(s);
-                System.out.println("DIM");
+                //System.out.println("DIM");
             }
             else {
                 ouvinte.messageArrived(evento);
@@ -123,9 +122,9 @@ public class BComp extends Bolinha {
             }
         }
 
-        if (checarColisao(x, y, height, width)) { 
+        if (checarColisao(height, width)) { 
             ouvinte.messageArrived(evento);
-            System.out.println("CHECOU");
+            //System.out.println("CHECOU");
             
             probs[mov] -= 50;
             

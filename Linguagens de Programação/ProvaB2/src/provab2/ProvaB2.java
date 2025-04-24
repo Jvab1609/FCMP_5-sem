@@ -26,8 +26,8 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
     
     int sT = (int) (Math.random()*(90-10 + 1) + 10);
     int dT = (int) (Math.random()*(18-3 + 1) + 3);
-    int xT = (int) (Math.random()*(490-10 + 1) + 10);
-    int yT = (int) (Math.random()*(390-10 + 1) + 10);
+    int xT = (int) (Math.random()*((490-sT)-10 + 1) + 10);
+    int yT = (int) (Math.random()*((390-sT)-10 + 1) + 10);
     Color compColor = Color.RED;
 
     public ProvaB2() {
@@ -67,8 +67,8 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
                     jPanel1.repaint();
                     if (colidiu == true) {
                         j = 41;
-                        System.out.println("COLIDIU");
-                        System.out.println("X: " + comp.getX() + "\tY: " + comp.getY() + "\tS: " + comp.getS());
+                        //System.out.println("COLIDIU");
+                        //System.out.println("X: " + comp.getX() + "\tY: " + comp.getY() + "\tS: " + comp.getS());
                         colidiu = false;
                     }
                     try {
@@ -144,7 +144,7 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
         int width = jPanel1.getWidth();
         
         player.processarInput(tecla, height, width);
-        System.out.println(comp.strProbs());
+        //System.out.println(comp.strProbs());
         this.repaint();
     }//GEN-LAST:event_jPanel1KeyPressed
 
