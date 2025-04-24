@@ -41,6 +41,7 @@ public class BComp extends Bolinha {
         
         int xAnt = x;
         int yAnt = y;
+        int sAnt = s;
         
         int mov = 5;
         
@@ -121,7 +122,7 @@ public class BComp extends Bolinha {
             }
         }
 
-        if (checarColisao(height, width, xAnt, yAnt, xOutra, yOutra, sOutra)) { 
+        if (checarColisao(height, width, xAnt, yAnt, sAnt, xOutra, yOutra, sOutra)) { 
             // Manda para o painel que a bolinha colidiu, para ele fazer outra vez.
             ouvinte.messageArrived(evento);
             

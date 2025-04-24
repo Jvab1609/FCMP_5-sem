@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package provab2;
 
 import java.awt.event.KeyEvent;
@@ -27,6 +23,7 @@ public class BPlayer extends Bolinha {
         
         int xAnt = x;
         int yAnt = y;
+        int sAnt = s;
         
         switch(tecla) {
             case KeyEvent.VK_UP: 
@@ -71,7 +68,7 @@ public class BPlayer extends Bolinha {
                 }
                 break;                 
         }
-        checarColisao(height, width, xAnt, yAnt, xOutra, yOutra, sOutra); // Método da superclasse que trata colisão
+        checarColisao(height, width, xAnt, yAnt, sAnt, xOutra, yOutra, sOutra); // Método da superclasse que trata colisão
     }
                 
     

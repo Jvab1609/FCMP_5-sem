@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package provab2;
 
 import java.awt.Color;
@@ -32,7 +28,9 @@ public abstract class Bolinha {
     }
     
     // Método para tratamento de colisão
-    public boolean checarColisao(int height, int width, int xAnt, int yAnt, int xOutra, int yOutra, int sOutra) {  
+    public boolean checarColisao(int height, int width, int xAnt, int yAnt, int sAnt, int xOutra, int yOutra, int sOutra) {  
+        
+        // Tratando colisão com os limites do painel
         
         if (y < 0) {
             y = 0;
@@ -51,37 +49,30 @@ public abstract class Bolinha {
             x = width - s;
             return true;
         }
+        
+        // Tratando colisão entre bolinhas:
+        
+        // Calcula a distância entre os centros das bolinhas em X e Y
         float distY = y + s/2.0f - (yOutra + sOutra/2.0f);
         distY = Math.abs(distY);
         float distX = x + s/2.0f - (xOutra + sOutra/2.0f);
         distX = Math.abs(distX);
         
         
-        
+        // Se for menor, trata isso
         if (distY < (s/2.0f + sOutra/2.0f) &&
                 distX < (s/2.0f + sOutra/2.0f)) {
+            
+            // Se x e y não tiverem mudado, isso significa que foi o tamanho que mudou.
+            // Previno essa mudança
             if (x == xAnt && y == yAnt) {
-                if (x < xOutra) {
-                    x = xOutra - s;
-                }
-                else {
-                    x = xOutra + sOutra;
-                }
-                
-                if (y < yOutra) {
-                    y = yOutra - s;
-                }
-                else {
-                    y = yOutra + sOutra;
-                }
+                s = sAnt;
             }
+            // Se não, apenas volto x e y para seus valores prévios
             else {
                 x = xAnt;
                 y = yAnt;
             }
-            
-            
-            
             return true;
         }
         

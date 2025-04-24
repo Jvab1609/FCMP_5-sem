@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package provab2;
 
 /**
  *
- * @author 202310501
+ * @author jvalb
  */
 public interface MessageEventListener {
     public void messageArrived(MessageEvent e);

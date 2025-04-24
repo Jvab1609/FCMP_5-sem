@@ -2,39 +2,33 @@ package provab2;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
 /**
  *
- * @author 202310501
+ * @author jvalb
  */
 public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener {
     
     int s = 20;
     int d = 5;
     int x = 200;
-    int y = 200;
+    int y = 150;
     Color playerColor = Color.GREEN;
     
-    // Criando a bolinha controlada por Thread com valores aleeatórios
+    // Criando a bolinha controlada por Thread com valores aleeatórios de s e d
     int sT = (int) (Math.random()*(90-10 + 1) + 10);
     int dT = (int) (Math.random()*(18-3 + 1) + 3);
-    int xT = (int) (Math.random()*((490-sT)-10 + 1) + 10);
-    int yT = (int) (Math.random()*((390-sT)-10 + 1) + 10);
+    int xT = 300;
+    int yT = 250;
     Color compColor = Color.RED;
 
     public ProvaB2() {
         initComponents();
         jPanel1.requestFocus();
-        //new Thread(comportamentoComp).start();
+        new Thread(comportamentoComp).start();
     }
     
     BPlayer player = new BPlayer(s, d, x, y);
@@ -75,6 +69,7 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
                         j = 41;
                         // Se colidiu, para de dar esse input
                         colidiu = false;
+                        System.out.println("COLIDIU");
                     }
                     try {
                         Thread.sleep(100); // dá um sleep de 0,1s porque senão os movimentos são instantâneos
@@ -144,12 +139,13 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel1KeyPressed
+        // Evento de input do usuário
+        
         int tecla = evt.getKeyCode();
         int height = jPanel1.getHeight();
         int width = jPanel1.getWidth();
         
         player.processarInput(tecla, height, width, comp.getX(), comp.getY(), comp.getS());
-        System.out.println(comp.strProbs());
         this.repaint();
     }//GEN-LAST:event_jPanel1KeyPressed
 
