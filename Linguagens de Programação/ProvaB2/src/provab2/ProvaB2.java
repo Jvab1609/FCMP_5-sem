@@ -144,7 +144,7 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
         int width = jPanel1.getWidth();
         
         player.processarInput(tecla, height, width);
-        //System.out.println(comp.strProbs());
+        System.out.println(comp.strProbs());
         this.repaint();
     }//GEN-LAST:event_jPanel1KeyPressed
 
