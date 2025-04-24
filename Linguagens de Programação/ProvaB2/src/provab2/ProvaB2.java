@@ -24,6 +24,7 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
     int y = 200;
     Color playerColor = Color.GREEN;
     
+    // Criando a bolinha controlada por Thread com valores aleeatórios
     int sT = (int) (Math.random()*(90-10 + 1) + 10);
     int dT = (int) (Math.random()*(18-3 + 1) + 3);
     int xT = (int) (Math.random()*((490-sT)-10 + 1) + 10);
@@ -33,7 +34,7 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
     public ProvaB2() {
         initComponents();
         jPanel1.requestFocus();
-        new Thread(comportamentoComp).start();
+        //new Thread(comportamentoComp).start();
     }
     
     BPlayer player = new BPlayer(s, d, x, y);
@@ -47,7 +48,7 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
     }
     
     
-    
+    // Coloquei a bolinha para rodar num runnable criado aqui porque, dentro dela, ficava difícil de passar o tamanho da tela caso fosse reajustada
     Runnable comportamentoComp = new Runnable() {
         @Override
         public void run() {
@@ -60,15 +61,19 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
                 
                 int height = jPanel1.getHeight();
                 int width = jPanel1.getWidth();
+                
+                // Número de repetições do input
                 int l = (int) (Math.random()*(40-1 + 1) + 1);
+                
+                // Valor aleatório que, de acordo com os intervalos da BComp, corresponderá a um input
                 int tecla = (int) (Math.random()*(soma-0 + 1) + 0);
+                System.out.println(l);
                 for (int j = 0; j < l; j++) {
-                    comp.processarInput(tecla, height, width);
+                    comp.processarInput(tecla, height, width, player.getX(), player.getY(), player.getS());
                     jPanel1.repaint();
                     if (colidiu == true) {
                         j = 41;
-                        //System.out.println("COLIDIU");
-                        //System.out.println("X: " + comp.getX() + "\tY: " + comp.getY() + "\tS: " + comp.getS());
+                        // Se colidiu, para de dar esse input
                         colidiu = false;
                     }
                     try {
@@ -143,7 +148,7 @@ public class ProvaB2 extends javax.swing.JFrame implements MessageEventListener 
         int height = jPanel1.getHeight();
         int width = jPanel1.getWidth();
         
-        player.processarInput(tecla, height, width);
+        player.processarInput(tecla, height, width, comp.getX(), comp.getY(), comp.getS());
         System.out.println(comp.strProbs());
         this.repaint();
     }//GEN-LAST:event_jPanel1KeyPressed

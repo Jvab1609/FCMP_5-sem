@@ -29,10 +29,10 @@ public abstract class Bolinha {
     public void pintaBolinha(Graphics g, Color cor) {
         g.setColor(cor);
         g.fillOval(x, y, s, s);
-        //jPanel1.paint(g); // Cada vez que a janela der refresh, vai pintar
     }
     
-    public boolean checarColisao(int height, int width) {  
+    // Método para tratamento de colisão
+    public boolean checarColisao(int height, int width, int xAnt, int yAnt, int xOutra, int yOutra, int sOutra) {  
         
         if (y < 0) {
             y = 0;
@@ -51,35 +51,39 @@ public abstract class Bolinha {
             x = width - s;
             return true;
         }
+        float distY = y + s/2.0f - (yOutra + sOutra/2.0f);
+        distY = Math.abs(distY);
+        float distX = x + s/2.0f - (xOutra + sOutra/2.0f);
+        distX = Math.abs(distX);
         
-//        else if (((hitbox[0] < hitboxOutra[1] && hitbox[0] > hitboxOutra[0]) ||
-//                (hitbox[1] > hitboxOutra[0] && hitbox[1] < hitboxOutra[1])) &&
-//                ((hitbox[2] < hitboxOutra[3] && hitbox[2] > hitboxOutra[2]) ||
-//                (hitbox[3] > hitboxOutra[2] && hitbox[3] < hitboxOutra[3]))) {
-//            
-//
-//            switch (mov) {
-//                case 0:
-//                    y = hitboxOutra[3] + 1;
-//                    break;
-//                case 1:
-//                    y = hitboxOutra[2] - s - 1;
-//                    break;
-//                case 2:
-//                    x = hitboxOutra[1] + 1;
-//                    break;
-//                case 3:
-//                    x = hitboxOutra[0] - s - 1;
-//                    break;
-//                case 5:
-//                    y = yAnt;
-//                    x = xAnt;
-//            }
-//            
-//            System.out.println("COLISÃO ENTRE");
-//            return true;
-//        }
         
+        
+        if (distY < (s/2.0f + sOutra/2.0f) &&
+                distX < (s/2.0f + sOutra/2.0f)) {
+            if (x == xAnt && y == yAnt) {
+                if (x < xOutra) {
+                    x = xOutra - s;
+                }
+                else {
+                    x = xOutra + sOutra;
+                }
+                
+                if (y < yOutra) {
+                    y = yOutra - s;
+                }
+                else {
+                    y = yOutra + sOutra;
+                }
+            }
+            else {
+                x = xAnt;
+                y = yAnt;
+            }
+            
+            
+            
+            return true;
+        }
         
         else {
             return false;
@@ -118,6 +122,6 @@ public abstract class Bolinha {
         return y;
     }
 
-    public abstract void processarInput(int tecla, int height, int width);
+    public abstract void processarInput(int tecla, int height, int width, int xOutra, int yOutra, int sOutra);
     
 }

@@ -14,9 +14,10 @@ public class BComp extends Bolinha {
 
     private ProvaB2 ouvinte;
     
+    // Aqui na bolinha controlada pelo computador, pensei em fazer por probabilidades.
+    // A cada vez que o limite é atingido, aquele movimento é "penalizado", e o contrário é bonificado com mais probabilidade de acontecer
+    
     private int[] probs = {300, 300, 300, 300, 200, 200, 200, 200};
-    
-    
     
     public BComp(int s, int d, int x, int y, ProvaB2 ouvinte) {
         super(s, d, x, y);
@@ -32,14 +33,14 @@ public class BComp extends Bolinha {
     }
     
     @Override
-    public void processarInput(int tecla, int height, int width) {
+    public void processarInput(int tecla, int height, int width, int xOutra, int yOutra, int sOutra) {
         int s = this.getS();
         int d = this.getD();
         int x = this.getX();
         int y = this.getY();
         
-        //int[] novoHit = {x-1, x+s+1, y-1, y+s+1};
-        //setHitbox(novoHit);
+        int xAnt = x;
+        int yAnt = y;
         
         int mov = 5;
         
@@ -47,8 +48,6 @@ public class BComp extends Bolinha {
        
         if (tecla < somaProbs(0)) {
             y-=d;
-            ouvinte.messageArrived(evento);
-           
             this.setY(y);
             mov = 0;
             System.out.println("CIMA");
@@ -122,9 +121,9 @@ public class BComp extends Bolinha {
             }
         }
 
-        if (checarColisao(height, width)) { 
+        if (checarColisao(height, width, xAnt, yAnt, xOutra, yOutra, sOutra)) { 
+            // Manda para o painel que a bolinha colidiu, para ele fazer outra vez.
             ouvinte.messageArrived(evento);
-            //System.out.println("CHECOU");
             
             probs[mov] -= 50;
             

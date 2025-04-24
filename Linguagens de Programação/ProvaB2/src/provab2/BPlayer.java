@@ -17,14 +17,16 @@ public class BPlayer extends Bolinha {
     }
 
     @Override
-    public void processarInput(int tecla, int height, int width) {
+    public void processarInput(int tecla, int height, int width, int xOutra, int yOutra, int sOutra) {
         
                 
         int s = this.getS();
         int d = this.getD();
         int x = this.getX();
         int y = this.getY();
-       
+        
+        int xAnt = x;
+        int yAnt = y;
         
         switch(tecla) {
             case KeyEvent.VK_UP: 
@@ -69,7 +71,7 @@ public class BPlayer extends Bolinha {
                 }
                 break;                 
         }
-        checarColisao(height, width); // Método da superclasse que trata colisão
+        checarColisao(height, width, xAnt, yAnt, xOutra, yOutra, sOutra); // Método da superclasse que trata colisão
     }
                 
     
