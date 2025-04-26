@@ -18,46 +18,48 @@ rows_count = cursor.fetchall()
 count = rows_count[0][0]
 
 
-def tutor_animal():
-    global atualizar_ta
-    global id_tutor_animal
-    if (atualizar_ta == 1):
-        id_tutor_animal = random.randint(1, 100000)
-        atualizar_ta = 0
-        return id_tutor_animal
-    else:
-        atualizar_ta = 1
-        return id_tutor_animal
+# def tutor_animal():
+#     global atualizar_ta
+#     global id_tutor_animal
+#     if (atualizar_ta == 1):
+#         id_tutor_animal = random.randint(1, 100000)
+#         atualizar_ta = 0
+#         return id_tutor_animal
+#     else:
+#         atualizar_ta = 1
+#         return id_tutor_animal
 
-def info_consulta():
-    query = ("SELECT senha FROM usuario")
+query = ("SELECT id_consulta, veterinario_id_veterinario, animal_id_animal, servico_id_servico, tutor_id_tutor, unidade_id_unidade FROM consulta WHERE data_cancelamento IS NULL")
 
-    parametros = [request.form.get("login")]
-    cursor.execute(query, parametros)
-    rows = cursor.fetchall()
+cursor.execute(query)
+rows_consulta = cursor.fetchall()
+print(count)
+print(rows_consulta[1][0])
+formas = ['Pix', 'Débito', 'Crédito', 'Dinheiro', 'Boleto']
 
 batch_size = 1
 data = [
     (
-     i,
+     i + 1,
      float(random.randint(100, 1000)),
-     f"forma_{i}",
+     f"{formas[i % 5]}",
      f"obs_{i}",
-     i,
-     i,
-     i,
-     i,
-     i
+     rows_consulta[i][0],
+     rows_consulta[i][1],
+     rows_consulta[i][2],
+     rows_consulta[i][3],
+     rows_consulta[i][4],
+     rows_consulta[i][5],
     )
-    for i in range(1, count + 1)]  # Example data
+    for i in range(count)]  # Example data
 print(len(data))
 for i in range(0, len(data), batch_size):
     batch = data[i:i+batch_size]
     cursor.execute("START TRANSACTION")
     conn.commit()
     cursor.executemany(
-        "INSERT INTO nota (id_nota, valor_pago, forma_pagto, obs, tutor_id_tutor, consulta_id_consulta, consulta_veterinario_id_veterinario, consulta_animal_id_animal, consulta_servico_id_servico, consulta_tutor_id_tutor, consulta_unidade_id_unidade)" \
-        "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", batch)
+        "INSERT INTO nota (id_nota, valor_pago, forma_pagto, obs, consulta_id_consulta, consulta_veterinario_id_veterinario, consulta_animal_id_animal, consulta_servico_id_servico, consulta_tutor_id_tutor, consulta_unidade_id_unidade)" \
+        "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", batch)
     conn.commit()
     cursor.execute("COMMIT")
     conn.commit()

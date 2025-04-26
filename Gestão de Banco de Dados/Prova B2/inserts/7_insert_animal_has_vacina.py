@@ -9,7 +9,7 @@ conn.commit()
 
 batch_size = 1
 data = [
-    (i % 20,
+    (i % 20 + 1,
      i, 
      f"{random.randint(2015, 2024)}-{random.randint(1, 12)}-{random.randint(1, 28)}",
      f"{random.randint(2015, 2024)}-{random.randint(1, 12)}-{random.randint(1, 28)}",
