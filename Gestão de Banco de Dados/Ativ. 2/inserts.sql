@@ -77,7 +77,16 @@ INSERT INTO vacina VALUES ('7', 'Vacina contra Leptospirose', 180);
 INSERT INTO vacina VALUES ('8', 'Vacina contra Giárdia', 180);
 INSERT INTO vacina VALUES ('9', 'Vacina contra Tosse dos Canis', 365);
 INSERT INTO vacina VALUES ('10', 'Vacina contra Leishmaniose', 365);
-
+INSERT INTO vacina VALUES ('11', 'Vacina contra Hepatite Infecciosa Canina', 365);
+INSERT INTO vacina VALUES ('12', 'Vacina contra Parvovirose', 365);
+INSERT INTO vacina VALUES ('13', 'Vacina contra Coronavirose Canina', 365);
+INSERT INTO vacina VALUES ('14', 'Vacina contra Calicivirose Felina', 365);
+INSERT INTO vacina VALUES ('15', 'Vacina contra Panleucopenia Felina', 365);
+INSERT INTO vacina VALUES ('16', 'Vacina contra Clamidiose Felina', 365);
+INSERT INTO vacina VALUES ('17', 'Vacina contra Cinomose', 365);
+INSERT INTO vacina VALUES ('18', 'Vacina contra Parainfluenza Canina', 365);
+INSERT INTO vacina VALUES ('19', 'Vacina contra Bordetelose', 180);
+INSERT INTO vacina VALUES ('20', 'Vacina contra Erliquiose', 180);
 
 INSERT INTO animal_has_vacina VALUES ('1', '1', '2025-03-24', '2026-03-24', 'Sem observações');
 INSERT INTO animal_has_vacina VALUES ('1', '2', '2025-03-24', '2026-03-24', 'Sem observações');

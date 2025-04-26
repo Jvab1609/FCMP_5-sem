@@ -22,6 +22,16 @@ INSERT INTO vacina VALUES ('7', 'Vacina contra Leptospirose', 180);
 INSERT INTO vacina VALUES ('8', 'Vacina contra Giárdia', 180);
 INSERT INTO vacina VALUES ('9', 'Vacina contra Tosse dos Canis', 365);
 INSERT INTO vacina VALUES ('10', 'Vacina contra Leishmaniose', 365);
+INSERT INTO vacina VALUES ('11', 'Vacina contra Hepatite Infecciosa Canina', 365);
+INSERT INTO vacina VALUES ('12', 'Vacina contra Parvovirose', 365);
+INSERT INTO vacina VALUES ('13', 'Vacina contra Coronavirose Canina', 365);
+INSERT INTO vacina VALUES ('14', 'Vacina contra Calicivirose Felina', 365);
+INSERT INTO vacina VALUES ('15', 'Vacina contra Panleucopenia Felina', 365);
+INSERT INTO vacina VALUES ('16', 'Vacina contra Clamidiose Felina', 365);
+INSERT INTO vacina VALUES ('17', 'Vacina contra Cinomose', 365);
+INSERT INTO vacina VALUES ('18', 'Vacina contra Parainfluenza Canina', 365);
+INSERT INTO vacina VALUES ('19', 'Vacina contra Bordetelose', 180);
+INSERT INTO vacina VALUES ('20', 'Vacina contra Erliquiose', 180);
 
 -- Unidade 1
 INSERT INTO veterinario VALUES (1, 'Ricardo Pereira', 'Cirurgião Veterinário', 0, 'loginRicardo', sha1('senhaRicardo'), 1);
@@ -70,7 +80,6 @@ INSERT INTO veterinario VALUES (37, 'Aline Costa', 'Nefrologista Veterinário', 
 INSERT INTO veterinario VALUES (38, 'Otávio Nunes', 'Infectologista Veterinário', 0, 'loginOtavio', sha1('senhaOtavio'), 5);
 INSERT INTO veterinario VALUES (39, 'Elaine Castro', 'Patologista Veterinário', 0, 'loginElaine', sha1('senhaElaine'), 5);
 INSERT INTO veterinario VALUES (40, 'Leandro Rezende', 'Especialista em Fisioterapia Animal', 0, 'loginLeandro', sha1('senhaLeandro'), 5);
-
 
 
 INSERT INTO servico VALUES (1, 'Banho', '60.0', 'Inclui shampoo, condicionador e secagem', 4);
