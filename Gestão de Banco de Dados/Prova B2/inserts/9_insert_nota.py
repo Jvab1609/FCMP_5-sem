@@ -43,6 +43,7 @@ data = [
      i + 1,
      float(random.randint(100, 1000)),
      f"{formas[i % 5]}",
+     f"2025-{random.randint(1, 12)}-{random.randint(1, 28)} {random.randint(0, 23)}:{random.randint(0, 59)}:{random.randint(0, 59)}",
      f"obs_{i}",
      rows_consulta[i][0],
      rows_consulta[i][1],
@@ -58,8 +59,8 @@ for i in range(0, len(data), batch_size):
     cursor.execute("START TRANSACTION")
     conn.commit()
     cursor.executemany(
-        "INSERT INTO nota (id_nota, valor_pago, forma_pagto, obs, consulta_id_consulta, consulta_veterinario_id_veterinario, consulta_animal_id_animal, consulta_servico_id_servico, consulta_tutor_id_tutor, consulta_unidade_id_unidade)" \
-        "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", batch)
+        "INSERT INTO nota (id_nota, valor_pago, forma_pagto, data_pagto, obs, consulta_id_consulta, consulta_veterinario_id_veterinario, consulta_animal_id_animal, consulta_servico_id_servico, consulta_tutor_id_tutor, consulta_unidade_id_unidade)" \
+        "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", batch)
     conn.commit()
     cursor.execute("COMMIT")
     conn.commit()
