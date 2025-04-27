@@ -61,7 +61,7 @@ for i in range(0, len(data), batch_size):
     cursor.executemany(
         "INSERT INTO nota (id_nota, valor_pago, forma_pagto, data_pagto, obs, consulta_id_consulta, consulta_veterinario_id_veterinario, consulta_animal_id_animal, consulta_servico_id_servico, consulta_tutor_id_tutor, consulta_unidade_id_unidade)" \
         "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", batch)
-    conn.commit()
+    conn.commit() 
     cursor.execute("COMMIT")
     conn.commit()
     print(i)
