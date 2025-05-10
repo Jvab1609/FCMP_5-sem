@@ -82,24 +82,137 @@ INSERT INTO veterinario VALUES (39, 'Elaine Castro', 'Patologista Veterinário',
 INSERT INTO veterinario VALUES (40, 'Leandro Rezende', 'Especialista em Fisioterapia Animal', 0, 'loginLeandro', sha1('senhaLeandro'), 5);
 
 
-INSERT INTO servico VALUES (1, 'Banho', '60.0', 'Inclui shampoo, condicionador e secagem', 4);
-INSERT INTO servico VALUES (2, 'Tosa Higiênica', '50.0', 'Apenas patas, barriga e região íntima', 6);
-INSERT INTO servico VALUES (3, 'Tosa Completa', '90.0', 'Tosa padrão da raça ou conforme solicitado', 5);
-INSERT INTO servico VALUES (4, 'Consulta Veterinária', '120.0', 'Consulta geral com clínico veterinário', 2);
-INSERT INTO servico VALUES (5, 'Vacinação', '80.0', 'Aplicação de vacina conforme protocolo médico', 4);
-INSERT INTO servico VALUES (6, 'Cirurgia', '500.0', 'Procedimento cirúrgico sob consulta', 2);
-INSERT INTO servico VALUES (7, 'Exames Laboratoriais', '150.0', 'Coleta e análise de sangue, urina e fezes', 5);
-INSERT INTO servico VALUES (8, 'Tratamento Dermatológico', '200.0', 'Consulta e tratamento para problemas de pele', 2);
-INSERT INTO servico VALUES (9, 'Terapia Comportamental', '180.0', 'Sessão com especialista em comportamento animal', 3);
-INSERT INTO servico VALUES (10, 'Emergência 24h', '300.0', 'Atendimento emergencial a qualquer horário', 6);
-INSERT INTO servico VALUES (11, 'Fisioterapia Animal', '250.0', 'Sessões para reabilitação física de animais', 2);
-INSERT INTO servico VALUES (12, 'Consulta Cardiológica', '220.0', 'Avaliação e acompanhamento cardíaco veterinário', 2);
-INSERT INTO servico VALUES (13, 'Consulta Neurológica', '240.0', 'Diagnóstico e tratamento de distúrbios neurológicos', 2);
-INSERT INTO servico VALUES (14, 'Consulta Oftalmológica', '200.0', 'Avaliação da visão e tratamento ocular', 2);
-INSERT INTO servico VALUES (15, 'Consulta Dermatológica', '190.0', 'Consulta especializada em doenças de pele', 2);
-INSERT INTO servico VALUES (16, 'Hotelzinho', '100.0', 'Hospedagem diária para cães e gatos', 10);
-INSERT INTO servico VALUES (17, 'Daycare', '80.0', 'Creche para animais durante o dia', 12);
-INSERT INTO servico VALUES (18, 'Banho Medicamentoso', '70.0', 'Banho terapêutico com produtos específicos', 4);
-INSERT INTO servico VALUES (19, 'Consulta Nutricional', '150.0', 'Orientação alimentar e dietética para pets', 3);
-INSERT INTO servico VALUES (20, 'Acupuntura Veterinária', '260.0', 'Sessão de acupuntura para tratamentos diversos', 2);
+INSERT INTO servico VALUES (1, 'Banho', '60.0', 'Inclui shampoo, condicionador e secagem');
+INSERT INTO servico VALUES (2, 'Tosa Higiênica', '50.0', 'Apenas patas, barriga e região íntima');
+INSERT INTO servico VALUES (3, 'Tosa Completa', '90.0', 'Tosa padrão da raça ou conforme solicitado');
+INSERT INTO servico VALUES (4, 'Consulta Veterinária', '120.0', 'Consulta geral com clínico veterinário');
+INSERT INTO servico VALUES (5, 'Vacinação', '80.0', 'Aplicação de vacina conforme protocolo médico');
+INSERT INTO servico VALUES (6, 'Cirurgia', '500.0', 'Procedimento cirúrgico sob consulta');
+INSERT INTO servico VALUES (7, 'Exames Laboratoriais', '150.0', 'Coleta e análise de sangue, urina e fezes');
+INSERT INTO servico VALUES (8, 'Tratamento Dermatológico', '200.0', 'Consulta e tratamento para problemas de pele');
+INSERT INTO servico VALUES (9, 'Terapia Comportamental', '180.0', 'Sessão com especialista em comportamento animal');
+INSERT INTO servico VALUES (10, 'Emergência 24h', '300.0', 'Atendimento emergencial a qualquer horário');
+INSERT INTO servico VALUES (11, 'Fisioterapia Animal', '250.0', 'Sessões para reabilitação física de animais');
+INSERT INTO servico VALUES (12, 'Consulta Cardiológica', '220.0', 'Avaliação e acompanhamento cardíaco veterinário');
+INSERT INTO servico VALUES (13, 'Consulta Neurológica', '240.0', 'Diagnóstico e tratamento de distúrbios neurológicos');
+INSERT INTO servico VALUES (14, 'Consulta Oftalmológica', '200.0', 'Avaliação da visão e tratamento ocular');
+INSERT INTO servico VALUES (15, 'Consulta Dermatológica', '190.0', 'Consulta especializada em doenças de pele');
+INSERT INTO servico VALUES (16, 'Hotelzinho', '100.0', 'Hospedagem diária para cães e gatos');
+INSERT INTO servico VALUES (17, 'Daycare', '80.0', 'Creche para animais durante o dia');
+INSERT INTO servico VALUES (18, 'Banho Medicamentoso', '70.0', 'Banho terapêutico com produtos específicos');
+INSERT INTO servico VALUES (19, 'Consulta Nutricional', '150.0', 'Orientação alimentar e dietética para pets');
+INSERT INTO servico VALUES (20, 'Acupuntura Veterinária', '260.0', 'Sessão de acupuntura para tratamentos diversos');
+
+
+
+-- Unidade 1 - Brooklin SP
+INSERT INTO unidade_has_servico VALUES (1, 1, 9);
+INSERT INTO unidade_has_servico VALUES (1, 2, 8);
+INSERT INTO unidade_has_servico VALUES (1, 3, 8);
+INSERT INTO unidade_has_servico VALUES (1, 4, 6);
+INSERT INTO unidade_has_servico VALUES (1, 5, 9);
+INSERT INTO unidade_has_servico VALUES (1, 6, 2);
+INSERT INTO unidade_has_servico VALUES (1, 7, 4);
+INSERT INTO unidade_has_servico VALUES (1, 8, 4);
+INSERT INTO unidade_has_servico VALUES (1, 9, 3);
+INSERT INTO unidade_has_servico VALUES (1, 10, 2);
+INSERT INTO unidade_has_servico VALUES (1, 11, 2);
+INSERT INTO unidade_has_servico VALUES (1, 12, 3);
+INSERT INTO unidade_has_servico VALUES (1, 13, 2);
+INSERT INTO unidade_has_servico VALUES (1, 14, 3);
+INSERT INTO unidade_has_servico VALUES (1, 15, 3);
+INSERT INTO unidade_has_servico VALUES (1, 16, 7);
+INSERT INTO unidade_has_servico VALUES (1, 17, 7);
+INSERT INTO unidade_has_servico VALUES (1, 18, 6);
+INSERT INTO unidade_has_servico VALUES (1, 19, 3);
+INSERT INTO unidade_has_servico VALUES (1, 20, 2);
+
+-- Unidade 2 - Lourdes BH
+INSERT INTO unidade_has_servico VALUES (2, 1, 8);
+INSERT INTO unidade_has_servico VALUES (2, 2, 7);
+INSERT INTO unidade_has_servico VALUES (2, 3, 7);
+INSERT INTO unidade_has_servico VALUES (2, 4, 6);
+INSERT INTO unidade_has_servico VALUES (2, 5, 8);
+INSERT INTO unidade_has_servico VALUES (2, 6, 2);
+INSERT INTO unidade_has_servico VALUES (2, 7, 4);
+INSERT INTO unidade_has_servico VALUES (2, 8, 5);
+INSERT INTO unidade_has_servico VALUES (2, 9, 3);
+INSERT INTO unidade_has_servico VALUES (2, 10, 2);
+INSERT INTO unidade_has_servico VALUES (2, 11, 2);
+INSERT INTO unidade_has_servico VALUES (2, 12, 4);
+INSERT INTO unidade_has_servico VALUES (2, 13, 3);
+INSERT INTO unidade_has_servico VALUES (2, 14, 3);
+INSERT INTO unidade_has_servico VALUES (2, 15, 4);
+INSERT INTO unidade_has_servico VALUES (2, 16, 6);
+INSERT INTO unidade_has_servico VALUES (2, 17, 6);
+INSERT INTO unidade_has_servico VALUES (2, 18, 6);
+INSERT INTO unidade_has_servico VALUES (2, 19, 4);
+INSERT INTO unidade_has_servico VALUES (2, 20, 2);
+
+-- Unidade 3 - Botafogo Rio
+INSERT INTO unidade_has_servico VALUES (3, 1, 9);
+INSERT INTO unidade_has_servico VALUES (3, 2, 8);
+INSERT INTO unidade_has_servico VALUES (3, 3, 9);
+INSERT INTO unidade_has_servico VALUES (3, 4, 5);
+INSERT INTO unidade_has_servico VALUES (3, 5, 8);
+INSERT INTO unidade_has_servico VALUES (3, 6, 3);
+INSERT INTO unidade_has_servico VALUES (3, 7, 5);
+INSERT INTO unidade_has_servico VALUES (3, 8, 4);
+INSERT INTO unidade_has_servico VALUES (3, 9, 4);
+INSERT INTO unidade_has_servico VALUES (3, 10, 2);
+INSERT INTO unidade_has_servico VALUES (3, 11, 3);
+INSERT INTO unidade_has_servico VALUES (3, 12, 4);
+INSERT INTO unidade_has_servico VALUES (3, 13, 3);
+INSERT INTO unidade_has_servico VALUES (3, 14, 4);
+INSERT INTO unidade_has_servico VALUES (3, 15, 4);
+INSERT INTO unidade_has_servico VALUES (3, 16, 8);
+INSERT INTO unidade_has_servico VALUES (3, 17, 8);
+INSERT INTO unidade_has_servico VALUES (3, 18, 7);
+INSERT INTO unidade_has_servico VALUES (3, 19, 4);
+INSERT INTO unidade_has_servico VALUES (3, 20, 3);
+
+-- Unidade 4 - Centro Floripa
+INSERT INTO unidade_has_servico VALUES (4, 1, 7);
+INSERT INTO unidade_has_servico VALUES (4, 2, 7);
+INSERT INTO unidade_has_servico VALUES (4, 3, 6);
+INSERT INTO unidade_has_servico VALUES (4, 4, 5);
+INSERT INTO unidade_has_servico VALUES (4, 5, 7);
+INSERT INTO unidade_has_servico VALUES (4, 6, 2);
+INSERT INTO unidade_has_servico VALUES (4, 7, 4);
+INSERT INTO unidade_has_servico VALUES (4, 8, 3);
+INSERT INTO unidade_has_servico VALUES (4, 9, 3);
+INSERT INTO unidade_has_servico VALUES (4, 10, 1);
+INSERT INTO unidade_has_servico VALUES (4, 11, 2);
+INSERT INTO unidade_has_servico VALUES (4, 12, 3);
+INSERT INTO unidade_has_servico VALUES (4, 13, 2);
+INSERT INTO unidade_has_servico VALUES (4, 14, 3);
+INSERT INTO unidade_has_servico VALUES (4, 15, 3);
+INSERT INTO unidade_has_servico VALUES (4, 16, 6);
+INSERT INTO unidade_has_servico VALUES (4, 17, 6);
+INSERT INTO unidade_has_servico VALUES (4, 18, 6);
+INSERT INTO unidade_has_servico VALUES (4, 19, 3);
+INSERT INTO unidade_has_servico VALUES (4, 20, 2);
+
+-- Unidade 5 - Centro Curitiba
+INSERT INTO unidade_has_servico VALUES (5, 1, 9);
+INSERT INTO unidade_has_servico VALUES (5, 2, 9);
+INSERT INTO unidade_has_servico VALUES (5, 3, 8);
+INSERT INTO unidade_has_servico VALUES (5, 4, 6);
+INSERT INTO unidade_has_servico VALUES (5, 5, 9);
+INSERT INTO unidade_has_servico VALUES (5, 6, 3);
+INSERT INTO unidade_has_servico VALUES (5, 7, 5);
+INSERT INTO unidade_has_servico VALUES (5, 8, 4);
+INSERT INTO unidade_has_servico VALUES (5, 9, 4);
+INSERT INTO unidade_has_servico VALUES (5, 10, 2);
+INSERT INTO unidade_has_servico VALUES (5, 11, 3);
+INSERT INTO unidade_has_servico VALUES (5, 12, 4);
+INSERT INTO unidade_has_servico VALUES (5, 13, 3);
+INSERT INTO unidade_has_servico VALUES (5, 14, 3);
+INSERT INTO unidade_has_servico VALUES (5, 15, 4);
+INSERT INTO unidade_has_servico VALUES (5, 16, 7);
+INSERT INTO unidade_has_servico VALUES (5, 17, 7);
+INSERT INTO unidade_has_servico VALUES (5, 18, 7);
+INSERT INTO unidade_has_servico VALUES (5, 19, 4);
+INSERT INTO unidade_has_servico VALUES (5, 20, 3);
+
 
