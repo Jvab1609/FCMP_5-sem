@@ -1,7 +1,9 @@
 DROP PROCEDURE  IF EXISTS `Und_DecrCap`;
 DROP PROCEDURE  IF EXISTS `Und_IncrCap`;
+DROP PROCEDURE  IF EXISTS `Log_Insert`;
 DROP TRIGGER  IF EXISTS `AgendarConsulta`;
 DROP TRIGGER  IF EXISTS `CancelarConsulta`;
+DROP TRIGGER  IF EXISTS `Logging`;
 
 # Diminuir a capacidade quando agendo uma consulta
 
@@ -25,6 +27,8 @@ BEGIN
 	CALL Und_DecrCap(new.unidade_id_unidade, new.servico_id_servico);
 END //
 
+
+
 CREATE PROCEDURE `Und_IncrCap`(`id_unid` int, `id_serv` int)
 BEGIN
 	declare cont int(4);
@@ -40,6 +44,19 @@ BEGIN
 	ELSE
 		CALL Und_DecrCap(new.unidade_id_unidade, new.servico_id_servico);
 	END IF;
+END //
+
+
+
+CREATE PROCEDURE `Log_Insert`(`nome_tabela` varchar(20))
+BEGIN
+	INSERT INTO log VALUES(null, now(), CURRENT_USER(), CONCAT("UPDATE ", nome_tabela));
+END //
+
+CREATE TRIGGER `Logging` AFTER UPDATE ON clinica.consulta
+FOR EACH ROW
+BEGIN
+    CALL Log_Insert("Consulta");
 END //
 
 DELIMITER ;
