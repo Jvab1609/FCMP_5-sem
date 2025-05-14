@@ -50,7 +50,7 @@ END //
 
 CREATE PROCEDURE `Log_Insert`(`nome_tabela` varchar(20))
 BEGIN
-	INSERT INTO log VALUES(null, now(), CURRENT_USER(), CONCAT("UPDATE ", nome_tabela));
+	INSERT INTO log (data_hora, agente, acao) VALUES(now(), CURRENT_USER(), CONCAT("UPDATE ", nome_tabela));
 END //
 
 CREATE TRIGGER `Logging` AFTER UPDATE ON clinica.consulta
