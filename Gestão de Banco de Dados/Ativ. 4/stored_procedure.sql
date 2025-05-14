@@ -1,6 +1,8 @@
 DROP PROCEDURE  IF EXISTS `Und_DecrCap`;
 DROP PROCEDURE  IF EXISTS `Und_IncrCap`;
 DROP PROCEDURE  IF EXISTS `Log_Insert`;
+DROP PROCEDURE  IF EXISTS `Consultas_Mes`;
+
 DROP TRIGGER  IF EXISTS `AgendarConsulta`;
 DROP TRIGGER  IF EXISTS `CancelarConsulta`;
 DROP TRIGGER  IF EXISTS `Logging`;
@@ -57,6 +59,20 @@ CREATE TRIGGER `Logging` AFTER UPDATE ON clinica.consulta
 FOR EACH ROW
 BEGIN
     CALL Log_Insert("Consulta");
+END //
+
+# Número de consultas por mês
+
+DELIMITER //
+CREATE PROCEDURE `Consultas_Mes`(IN ano varchar(4))
+BEGIN
+	SELECT 
+		MONTH(consulta.horario_agendado),
+		COUNT(*) AS total_consultas
+	FROM consulta
+    WHERE YEAR(consulta.horario_agendado) = ano
+	GROUP BY MONTH(consulta.horario_agendado)
+	ORDER BY total_consultas DESC;
 END //
 
 DELIMITER ;
