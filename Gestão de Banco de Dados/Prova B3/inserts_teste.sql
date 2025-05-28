@@ -3,7 +3,7 @@ INSERT INTO endereco VALUES ('04534011', 123, 'Avenida Santo Amaro', 'Brooklin',
 INSERT INTO telefone VALUES ('11111111111', 1, null, null);
 INSERT INTO login VALUES (null, 'jackson5', 'jackson.five@gmail.com', sha1('senhaJackson5'), 1, null, null);
 
-INSERT INTO restaurante VALUES (null, 'Lelis Trattoria', '10.0', null, '4', 0);
+INSERT INTO restaurante VALUES (null, 'Lelis Trattoria', 'XX.XXX.XXX/0001-XX', '10.0', null, '4', 0);
 INSERT INTO endereco VALUES ('30140071', 456, 'Rua da Bahia', 'Lourdes', 'Belo Horizonte', 'MG', null, 1);
 INSERT INTO telefone VALUES ('11111111112', null, 1, null);
 INSERT INTO login VALUES (null, 'lelistrat', 'marketing@lelistrat.com', sha1('senhaLelis'), null, 1, null);

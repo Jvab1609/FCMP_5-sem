@@ -12,7 +12,6 @@ conn.commit()
 print("começando")
 batch_size = 1
 data = [
-    fake.
     (i, 
      f"{random.randint(10000000000, 99999999999)}",
      f"{names.get_first_name()}", 
