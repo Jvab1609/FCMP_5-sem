@@ -3,7 +3,7 @@ from faker import Faker
 import mysql.connector
 
 fake = Faker('pt_BR') 
-#print(f"telefone: {fake.phone_number()}")
+
 conn = mysql.connector.connect(user='dba_delivery', password='dba#1609', host='localhost', database='delivery')
 cursor = conn.cursor()
 
@@ -21,7 +21,7 @@ for i in range(100):
 
     cursor.execute("INSERT INTO entregador VALUES (null, %s, %s, %s, %s, 0);", params)
     conn.commit()
-    #f.write(f"INSERT INTO entregador VALUES (null, '{nome}', '{cnh}', '{cpf}', {nota}, 0);")
+    
     query = ("SELECT last_insert_id();")
 
     cursor.execute(query)
@@ -41,11 +41,11 @@ for i in range(100):
 
     telefone = fake.phone_number()
     params = [telefone, entregador_id]
-    #print(telefone)
+
     cursor.execute("INSERT INTO telefone VALUES (%s, %s, null, null)", params)
     conn.commit()
 
-    username = f"user_{entregador_id}"
+    username = f"user_entr_{nome.lower().split(' ')[0]}{i}"
     email = f"{nome.lower().replace(' ', '.')}@gmail.com"
     senha = f"senha_{nome.lower()}"
     params = [username, email, senha, entregador_id]
