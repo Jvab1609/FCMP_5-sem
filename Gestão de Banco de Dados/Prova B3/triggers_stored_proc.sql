@@ -1,8 +1,72 @@
 USE delivery;
 
-#DROP PROCEDURE  IF EXISTS `Consultas_Mes`;
+DROP PROCEDURE  IF EXISTS `ClassifRest`;
+DROP PROCEDURE  IF EXISTS `ClassifEntr`;
 
 DROP TRIGGER  IF EXISTS `CalcularMedia`;
+
+
+DELIMITER //
+CREATE PROCEDURE `ClassifRest`()
+BEGIN
+    DECLARE nota_i FLOAT;
+    DECLARE pronto INT DEFAULT 0;
+
+    DECLARE nota_cursor CURSOR FOR SELECT nota_med_restaurante FROM restaurante;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET pronto = 1;
+    
+    OPEN nota_cursor;
+    
+    REPEAT
+		FETCH nota_cursor INTO nota_i;
+        IF nota_i > 4.5 THEN
+			UPDATE restaurante SET classificacao = 'OTIMO' WHERE nota_med_restaurante = nota_i ;
+		ELSEIF nota_i >= 4 AND nota_i <= 4.5 THEN
+			UPDATE restaurante SET classificacao = 'BOM' WHERE nota_med_restaurante = nota_i;
+		ELSEIF nota_i >= 3 AND nota_i <= 4 THEN
+			UPDATE restaurante SET classificacao = 'MEDIANO' WHERE nota_med_restaurante = nota_i;
+        ELSEIF nota_i >= 2 AND nota_i <= 3 THEN
+			UPDATE restaurante SET classificacao = 'RUIM' WHERE nota_med_restaurante = nota_i;    
+		ELSE
+			UPDATE restaurante SET classificacao = 'PESSIMO' WHERE nota_med_restaurante = nota_i;
+		END IF;
+    UNTIL pronto
+    END REPEAT;
+    
+    CLOSE nota_cursor;
+END //
+
+
+DELIMITER //
+CREATE PROCEDURE `ClassifEntr`()
+BEGIN
+    DECLARE nota_i FLOAT;
+    DECLARE pronto INT DEFAULT 0;
+
+    DECLARE nota_cursor CURSOR FOR SELECT nota_media_entregador FROM entregador;
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET pronto = 1;
+    
+    OPEN nota_cursor;
+    
+    REPEAT
+		FETCH nota_cursor INTO nota_i;
+        IF nota_i > 4.5 THEN
+			UPDATE entregador SET classificacao = 'OTIMO' WHERE nota_media_entregador = nota_i ;
+		ELSEIF nota_i >= 4 AND nota_i <= 4.5 THEN
+			UPDATE entregador SET classificacao = 'BOM' WHERE nota_media_entregador = nota_i;
+		ELSEIF nota_i >= 3 AND nota_i <= 4 THEN
+			UPDATE entregador SET classificacao = 'MEDIANO' WHERE nota_media_entregador = nota_i;
+        ELSEIF nota_i >= 2 AND nota_i <= 3 THEN
+			UPDATE entregador SET classificacao = 'RUIM' WHERE nota_media_entregador = nota_i;    
+		ELSE
+			UPDATE entregador SET classificacao = 'PESSIMO' WHERE nota_media_entregador = nota_i;
+		END IF;
+    UNTIL pronto
+    END REPEAT;
+    
+    CLOSE nota_cursor;
+END //
+
 
 DELIMITER //
 CREATE TRIGGER `CalcularMedia` AFTER INSERT ON avaliacao
