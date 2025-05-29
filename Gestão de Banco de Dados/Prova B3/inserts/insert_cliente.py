@@ -31,7 +31,7 @@ for i in range(500):
     cursor.execute("INSERT INTO telefone VALUES (%s, null, null, %s)", params)
     conn.commit()
 
-    username = f"user_entr_{nome.lower().split(' ')[0]}{i}"
+    username = f"user_cli_{nome.lower().split(' ')[0]}{i}"
     email = f"{nome.lower().replace(' ', '.')}{i}@gmail.com"
     senha = f"senha_{nome.lower()}"
     params = [username, email, senha, cliente_id]
