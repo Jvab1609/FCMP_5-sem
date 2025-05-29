@@ -98,6 +98,15 @@ BEGIN
 	END IF;
 END // 
 
+CREATE PROCEDURE `TicketMedio` (IN idRest int)
+BEGIN
+	SELECT AVG(pagamento.valor) FROM restaurante
+	INNER JOIN pedido ON pedido.restaurante_id_restaurante = restaurante.id_restaurante
+    INNER JOIN pagamento ON pagamento.pedido_id_pedido = pedido.id_pedido
+	WHERE restaurante.id_restaurante = idRest;
+END //
+
+
 
 DELIMITER //
 CREATE TRIGGER `CalcularMedia` AFTER INSERT ON avaliacao

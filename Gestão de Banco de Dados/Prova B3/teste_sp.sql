@@ -15,4 +15,4 @@ CALL TopRestPedidos(0, 3);
 CALL TopEntrPedidos(1, 3);
 CALL TopEntrPedidos(0, 3);
 
-SELECT count(*) FROM information_schema.columns WHERE table_name ='entregador';
+CALL TicketMedio(1);
