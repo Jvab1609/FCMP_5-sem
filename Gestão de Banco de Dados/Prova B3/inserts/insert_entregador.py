@@ -29,7 +29,7 @@ for i in range(100):
     entregador_id = rows_consulta[0][0]
 
     cep = fake.postcode()
-    numero = random.randint(1, 999)
+    numero = random.randint(1, 2000)
     rua = fake.street_name()
     bairro = fake.bairro()
     cidade = fake.city()
@@ -46,7 +46,7 @@ for i in range(100):
     conn.commit()
 
     username = f"user_entr_{nome.lower().split(' ')[0]}{i}"
-    email = f"{nome.lower().replace(' ', '.')}@gmail.com"
+    email = f"{nome.lower().replace(' ', '.')}{i}@gmail.com"
     senha = f"senha_{nome.lower()}"
     params = [username, email, senha, entregador_id]
 

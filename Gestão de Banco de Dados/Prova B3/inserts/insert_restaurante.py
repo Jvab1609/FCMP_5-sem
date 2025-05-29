@@ -54,7 +54,7 @@ for i in range(100):
     rest_id = rows_consulta[0][0]
 
     cep = fake.postcode()
-    numero = random.randint(1, 999)
+    numero = random.randint(1, 2000)
     rua = fake.street_name()
     bairro = fake.bairro()
     cidade = fake.city()
