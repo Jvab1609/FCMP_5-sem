@@ -16,3 +16,5 @@ CALL TopEntrPedidos(1, 3);
 CALL TopEntrPedidos(0, 3);
 
 CALL TicketMedio(1);
+
+CALL TopPratos(3, 1, 3);

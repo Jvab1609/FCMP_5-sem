@@ -4,6 +4,9 @@ DROP PROCEDURE  IF EXISTS `ClassifRest`;
 DROP PROCEDURE  IF EXISTS `ClassifEntr`;
 DROP PROCEDURE  IF EXISTS `TopRestPedidos`;
 DROP PROCEDURE  IF EXISTS `TopEntrPedidos`;
+DROP PROCEDURE  IF EXISTS `TicketMedio`;
+DROP PROCEDURE  IF EXISTS `TopPratos`;
+
 DROP TRIGGER  IF EXISTS `CalcularMedia`;
 
 
@@ -106,7 +109,20 @@ BEGIN
 	WHERE restaurante.id_restaurante = idRest;
 END //
 
-
+CREATE PROCEDURE `TopPratos` (IN idRest int, IN modo int, IN limite int)
+BEGIN
+	IF modo = 1 THEN
+		SELECT prato.nome_prato, COUNT(pedido_has_prato.prato_id_prato) FROM prato
+		INNER JOIN pedido_has_prato ON pedido_has_prato.prato_id_prato = prato.id_prato
+        WHERE prato.restaurante_id_restaurante = idRest
+		GROUP BY prato.nome_prato ORDER BY COUNT(*) DESC LIMIT limite;
+    ELSE
+		SELECT prato.nome_prato, COUNT(pedido_has_prato.prato_id_prato) FROM prato
+		INNER JOIN pedido_has_prato ON pedido_has_prato.prato_id_prato = prato.id_prato
+        WHERE prato.restaurante_id_restaurante = idRest
+		GROUP BY prato.nome_prato ORDER BY COUNT(*) ASC LIMIT limite;
+	END IF;
+END //
 
 DELIMITER //
 CREATE TRIGGER `CalcularMedia` AFTER INSERT ON avaliacao
