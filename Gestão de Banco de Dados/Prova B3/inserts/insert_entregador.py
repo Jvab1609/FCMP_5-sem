@@ -7,6 +7,23 @@ fake = Faker('pt_BR')
 conn = mysql.connector.connect(user='dba_delivery', password='dba#1609', host='localhost', database='delivery')
 cursor = conn.cursor()
 
+cidades = ['Campinas', 'São Paulo']
+bairros_sp = ['Moema', 'Jardins', 'Pinheiros', 'Mooca', 'Higienópolis', 'Liberdade']
+bairros_cps = ['Cambuí', 'Centro', 'Taquaral', 'Gramado', 'Bonfim', 'Guanabara']
+
+def escolher_cidade():
+    cidade = random.choice(cidades)
+    return cidade
+
+def escolher_bairro(cidade):
+    if (cidade == 'Campinas'):
+        bairro = random.choice(bairros_cps)
+    elif (cidade == 'São Paulo'):
+        bairro = random.choice(bairros_sp)
+    return bairro
+
+
+
 cursor.execute("START TRANSACTION")
 conn.commit()
 
@@ -31,9 +48,12 @@ for i in range(100):
     cep = fake.postcode()
     numero = random.randint(1, 2000)
     rua = fake.street_name()
-    bairro = fake.bairro()
-    cidade = fake.city()
-    estado = fake.estado_sigla()
+    cidade = escolher_cidade()
+    bairro = escolher_bairro(cidade)  
+    estado = "SP"
+    # bairro = fake.bairro()
+    # cidade = fake.city()
+    # estado = fake.estado_sigla()
 
     params = [cep, numero, rua, bairro, cidade, estado, entregador_id]
     cursor.execute("INSERT INTO endereco VALUES (%s, %s, %s, %s, %s, %s, %s, null);", params)
