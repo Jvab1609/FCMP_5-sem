@@ -103,8 +103,8 @@ for i in range(2000):
     cursor.execute("INSERT INTO pagamento VALUES (null, %s, %s, %s, %s);", params)
     conn.commit()
 
-    nota_rest = round(random.uniform(1, 5), 1)
-    nota_entr = round(random.uniform(1, 5), 1)
+    nota_rest = random.randint(1, 10) * 0.5
+    nota_entr = random.randint(1, 10) * 0.5
     params = [nota_rest, nota_entr, pedido_id]  
     cursor.execute("INSERT INTO avaliacao VALUES (null, %s, %s, 'COMENTÁRIO GENÉRICO', %s);", params)
     conn.commit()

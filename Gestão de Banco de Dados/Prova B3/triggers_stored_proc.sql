@@ -4,12 +4,18 @@ DROP PROCEDURE  IF EXISTS `ClassifRest`;
 DROP PROCEDURE  IF EXISTS `ClassifEntr`;
 DROP PROCEDURE  IF EXISTS `TopRestPedidos`;
 DROP PROCEDURE  IF EXISTS `TopEntrPedidos`;
+DROP PROCEDURE  IF EXISTS `TopRestAval`;
+DROP PROCEDURE  IF EXISTS `TopEntrAval`;
 DROP PROCEDURE  IF EXISTS `TicketMedio`;
 DROP PROCEDURE  IF EXISTS `TopPratos`;
 DROP PROCEDURE  IF EXISTS `TopBairros`;
 
 DROP TRIGGER  IF EXISTS `CalcularMedia`;
-
+DROP TRIGGER  IF EXISTS `LogInsertPedido`;
+DROP TRIGGER  IF EXISTS `LogRemoverPrato`;
+DROP TRIGGER  IF EXISTS `CheckExcluido`;
+DROP TRIGGER  IF EXISTS `ExcluirPratosRest`;
+DROP TRIGGER  IF EXISTS `PedidoDeletado`;
 
 DELIMITER //
 CREATE PROCEDURE `ClassifRest`()
@@ -101,6 +107,30 @@ BEGIN
 		GROUP BY entregador.id_entregador ORDER BY COUNT(*) ASC LIMIT limite;
 	END IF;
 END // 
+
+
+CREATE PROCEDURE `TopRestAval` (IN modo int, IN limite int)
+BEGIN
+	IF modo = 1 THEN
+		SELECT id_restaurante, nome_rest, nota_med_restaurante FROM restaurante
+		ORDER BY nota_med_restaurante DESC LIMIT limite;
+    ELSE
+		SELECT id_restaurante, nome_rest, nota_med_restaurante FROM restaurante
+		ORDER BY nota_med_restaurante ASC LIMIT limite;
+	END IF;
+END // 
+
+CREATE PROCEDURE `TopEntrAval` (IN modo int, IN limite int)
+BEGIN
+	IF modo = 1 THEN
+		SELECT id_entregador, nome_entregador, nota_media_entregador FROM entregador
+		ORDER BY nota_media_entregador DESC LIMIT limite;
+    ELSE
+		SELECT id_entregador, nome_entregador, nota_media_entregador FROM entregador
+		ORDER BY nota_media_entregador ASC LIMIT limite;
+	END IF;
+END // 
+
 
 CREATE PROCEDURE `TicketMedio` (IN idRest int)
 BEGIN
@@ -210,8 +240,51 @@ BEGIN
 			UPDATE restaurante SET classificacao = 'NA' WHERE nota_med_restaurante = avgRest;
 		END IF;
 	END IF;
-    
 END //
 
 
 
+
+CREATE TRIGGER `LogInsertPedido` AFTER INSERT ON pedido
+FOR EACH ROW
+BEGIN
+	INSERT INTO log (autor, data_hora, acao)
+	VALUES (CURRENT_USER(), NOW(), CONCAT('Novo pedido ID: ', new.id_pedido));
+END //
+
+CREATE TRIGGER `LogRemoverPrato` AFTER UPDATE ON prato
+FOR EACH ROW
+BEGIN
+	IF new.excluido = 1 THEN
+		INSERT INTO log (autor, data_hora, acao)
+		VALUES (CURRENT_USER(), NOW(), CONCAT('Prato excluído: ', new.id_prato));
+	END IF;
+END //
+
+CREATE TRIGGER `CheckExcluido` BEFORE INSERT ON pedido
+FOR EACH ROW
+BEGIN
+  IF (SELECT excluido FROM entregador WHERE id_entregador = NEW.entregador_id_entregador) = 1
+     OR (SELECT excluido FROM restaurante WHERE id_restaurante = NEW.restaurante_id_restaurante) = 1 THEN
+    SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Não é possível criar pedido com entregador ou restaurante inativo.';
+  END IF;
+END //
+
+CREATE TRIGGER `ExcluirPratosRest` AFTER UPDATE ON restaurante
+FOR EACH ROW
+BEGIN
+	IF NEW.excluido = 1 THEN
+		UPDATE prato SET excluido = 1 WHERE restaurante_id_restaurante = NEW.id_restaurante;
+	END IF;
+END //
+
+
+CREATE TRIGGER `PedidoDeletado` BEFORE DELETE ON pedido FOR EACH ROW
+BEGIN
+	DELETE FROM avaliacao WHERE pedido_id_pedido = OLD.id_pedido;
+    DELETE FROM pagamento WHERE pedido_id_pedido = OLD.id_pedido;
+    DELETE FROM pedido_has_prato WHERE pedido_id_pedido = OLD.id_pedido;
+    INSERT INTO log (autor, data_hora, acao)
+	VALUES (CURRENT_USER(), NOW(), CONCAT('Pedido ID ', OLD.id_pedido, ' foi deletado.'));
+END //
