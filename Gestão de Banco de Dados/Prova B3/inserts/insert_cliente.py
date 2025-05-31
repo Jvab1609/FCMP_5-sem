@@ -19,6 +19,7 @@ def escolher_cidade():
     return cidade
 
 def escolher_bairro(cidade):
+
     if (cidade == 'Campinas'):
         bairro = random.choice(bairros_cps)
     elif (cidade == 'São Paulo'):
@@ -77,7 +78,7 @@ for i in range(500):
         cep = fake.postcode()
         numero = random.randint(1, 2000)
         rua = fake.street_name()
-        cidade = escolher_cidade
+        cidade = escolher_cidade()
         bairro = escolher_bairro(cidade)  
         estado = "SP"
         # bairro = fake.bairro()

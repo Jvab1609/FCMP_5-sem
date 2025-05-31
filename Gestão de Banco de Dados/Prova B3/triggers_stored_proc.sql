@@ -6,6 +6,7 @@ DROP PROCEDURE  IF EXISTS `TopRestPedidos`;
 DROP PROCEDURE  IF EXISTS `TopEntrPedidos`;
 DROP PROCEDURE  IF EXISTS `TicketMedio`;
 DROP PROCEDURE  IF EXISTS `TopPratos`;
+DROP PROCEDURE  IF EXISTS `TopBairros`;
 
 DROP TRIGGER  IF EXISTS `CalcularMedia`;
 
@@ -124,7 +125,23 @@ BEGIN
 	END IF;
 END //
 
-DELIMITER //
+
+CREATE PROCEDURE `TopBairros` (IN cidade varchar(50), IN modo int, IN limite int)
+BEGIN
+	IF modo = 1 THEN
+		SELECT endereco.bairro, COUNT(pedido.id_pedido) FROM endereco
+		INNER JOIN pedido ON pedido.endereco_cep = endereco.cep AND pedido.endereco_num_end = endereco.num_end
+        WHERE endereco.cidade LIKE cidade
+		GROUP BY endereco.bairro ORDER BY COUNT(pedido.id_pedido) DESC LIMIT limite;
+    ELSE
+		SELECT endereco.bairro, COUNT(pedido.id_pedido) FROM endereco
+		INNER JOIN pedido ON pedido.endereco_cep = endereco.cep AND pedido.endereco_num_end = endereco.num_end
+        WHERE endereco.cidade LIKE cidade
+		GROUP BY endereco.bairro ORDER BY COUNT(pedido.id_pedido) ASC LIMIT limite;
+	END IF;
+END //
+
+
 CREATE TRIGGER `CalcularMedia` AFTER INSERT ON avaliacao
 FOR EACH ROW
 BEGIN
