@@ -1,3 +1,5 @@
+USE delivery;
+
 # Particionamento
 
 # Log, por ano (HASH)
@@ -9,58 +11,49 @@ PARTITION BY HASH(YEAR(data_hora))
 PARTITIONS 5;
 
 
-# Particionamento da consulta por unidade
-CREATE TABLE consulta_particionada (
-    id_consulta INT NOT NULL,
-    agendamento DATETIME,
-    horario_agendado DATETIME,
-    chegada_animal DATETIME,
-    inicio DATETIME,
-    termino DATETIME,
-    obs TEXT,
-    data_cancelamento DATETIME,
-    veterinario_id_veterinario INT,
-    animal_id_animal INT,
-    servico_id_servico INT,
-    tutor_id_tutor INT,
-    unidade_id_unidade INT,
-    PRIMARY KEY (id_consulta, unidade_id_unidade)
-)
-PARTITION BY LIST COLUMNS (unidade_id_unidade) (
-    PARTITION p1 VALUES IN (1),
-    PARTITION p2 VALUES IN (2),
-    PARTITION p3 VALUES IN (3),
-    PARTITION p4 VALUES IN (4),
-    PARTITION p5 VALUES IN (5)
-);
-INSERT INTO consulta_particionada
-SELECT * FROM consulta;
 
+SHOW CREATE TABLE pedido;
+# Particionamento da consulta por unidade
+
+CREATE TABLE pedido_historico (
+  `id_pedido` int NOT NULL AUTO_INCREMENT,
+  `status` varchar(20) DEFAULT NULL,
+  `recebido` datetime,
+  `inicio_preparo` datetime DEFAULT NULL,
+  `saida` datetime DEFAULT NULL,
+  `entrega` datetime DEFAULT NULL,
+  `cancelamento` datetime DEFAULT NULL,
+  `restaurante_id_restaurante` int NOT NULL,
+  `entregador_id_entregador` int NOT NULL,
+  `cliente_id_cliente` int NOT NULL,
+  `endereco_cep` varchar(9) NOT NULL,
+  `endereco_num_end` int NOT NULL, 
+  PRIMARY KEY (`id_pedido`, `recebido`)
+)
+PARTITION BY HASH(YEAR(recebido))
+PARTITIONS 8;
+
+INSERT INTO pedido_historico
+SELECT * FROM pedido;
 
 # Particionamento da nota fiscal por forma de pagamento
-CREATE TABLE nota_particionada (
-    id_nota INT NOT NULL,
-    valor_pago DECIMAL(10,2) NOT NULL,
-    forma_pagto VARCHAR(20) NOT NULL,
-    data_pagto DATETIME,
-    obs TEXT,
-    consulta_id_consulta INT,
-    consulta_veterinario_id_veterinario INT,
-    consulta_animal_id_animal INT,
-    consulta_servico_id_servico INT,
-    consulta_tutor_id_tutor INT,
-    consulta_unidade_id_unidade INT,
-    PRIMARY KEY (id_nota, forma_pagto)
+CREATE TABLE pagamento_particionado (
+    id_pagamento INT AUTO_INCREMENT,
+    horario_pagto DATETIME,
+    forma_pagto VARCHAR(10) NOT NULL,
+    valor FLOAT,
+    pedido_id_pedido INT NOT NULL,
+    PRIMARY KEY (`id_pagamento`, `forma_pagto`)
 )
 PARTITION BY LIST COLUMNS (forma_pagto) (
     PARTITION p1 VALUES IN ('Pix'),
     PARTITION p2 VALUES IN ('Débito'),
     PARTITION p3 VALUES IN ('Crédito'),
     PARTITION p4 VALUES IN ('Dinheiro'),
-    PARTITION p5 VALUES IN ('Boleto')
+    PARTITION p5 VALUES IN ('VR')
 );
-INSERT INTO nota_particionada
-SELECT * FROM nota;
+INSERT INTO pagamento_particionado
+SELECT * FROM pagamento;
 
 
 

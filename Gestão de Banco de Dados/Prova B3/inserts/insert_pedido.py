@@ -87,7 +87,7 @@ for i in range(2000):
             pratos.append(novo_prato)
 
     pagamento = entrega - timedelta(minutes=random.randint(1, 3))
-    formas = ['Débito', 'Crédito', 'Pix', 'VR']
+    formas = ['Débito', 'Crédito', 'Pix', 'VR', 'Dinheiro']
     forma = formas[random.randint(0, 3)]
     
     valor = 0
