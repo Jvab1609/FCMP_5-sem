@@ -9,6 +9,7 @@ DROP PROCEDURE  IF EXISTS `TopEntrAval`;
 DROP PROCEDURE  IF EXISTS `TicketMedio`;
 DROP PROCEDURE  IF EXISTS `TopPratos`;
 DROP PROCEDURE  IF EXISTS `TopBairros`;
+DROP PROCEDURE  IF EXISTS `TopClientes`;
 
 DROP TRIGGER  IF EXISTS `CalcularMedia`;
 DROP TRIGGER  IF EXISTS `LogInsertPedido`;
@@ -171,6 +172,14 @@ BEGIN
 	END IF;
 END //
 
+
+CREATE PROCEDURE `TopClientes`(IN idRest int, IN limite int)
+BEGIN
+	SELECT cliente.nome_cliente, COUNT(pedido.id_pedido) FROM cliente
+	INNER JOIN pedido ON pedido.cliente_id_cliente = cliente.id_cliente
+	WHERE pedido.restaurante_id_restaurante = idRest
+	GROUP BY cliente.nome_cliente ORDER BY COUNT(pedido.id_pedido) DESC LIMIT limite;
+END //
 
 CREATE TRIGGER `CalcularMedia` AFTER INSERT ON avaliacao
 FOR EACH ROW

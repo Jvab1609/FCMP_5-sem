@@ -97,7 +97,7 @@ for i in range(100):
     senha = f"senha_{nome.lower()}"
     params = [username, email, senha, rest_id]
 
-    cursor.execute("INSERT INTO login VALUES(null, %s, %s, sha1(%s), null, %s, null)", params)
+    cursor.execute("INSERT INTO login VALUES(null, %s, %s, sha1(%s), 0, null, %s, null)", params)
     conn.commit()
 
     # Insert dos pratos

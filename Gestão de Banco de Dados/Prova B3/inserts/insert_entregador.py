@@ -70,7 +70,7 @@ for i in range(100):
     senha = f"senha_{nome.lower()}"
     params = [username, email, senha, entregador_id]
 
-    cursor.execute("INSERT INTO login VALUES(null, %s, %s, sha1(%s), %s, null, null)", params)
+    cursor.execute("INSERT INTO login VALUES(null, %s, %s, sha1(%s), 0, %s, null, null)", params)
     conn.commit()
 
     print(i)

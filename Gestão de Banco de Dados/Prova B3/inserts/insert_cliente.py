@@ -53,7 +53,7 @@ for i in range(500):
     senha = f"senha_{nome.lower()}"
     params = [username, email, senha, cliente_id]
 
-    cursor.execute("INSERT INTO login VALUES(null, %s, %s, sha1(%s), null, null, %s)", params)
+    cursor.execute("INSERT INTO login VALUES(null, %s, %s, sha1(%s), 0, null, null, %s)", params)
     conn.commit()
 
     cep = fake.postcode()
