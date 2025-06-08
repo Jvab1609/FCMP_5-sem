@@ -83,28 +83,32 @@ BEGIN
     CLOSE nota_cursor;
 END //
 
-CREATE PROCEDURE `TopRestPedidos` (IN modo int, IN limite int)
+CREATE PROCEDURE `TopRestPedidos` (IN modo int, IN limite int, IN dataInicio DATE, IN dataFim DATE)
 BEGIN
 	IF modo = 1 THEN
 		SELECT restaurante.id_restaurante, restaurante.nome_rest, COUNT(pedido.id_pedido) FROM restaurante
 		INNER JOIN pedido ON pedido.restaurante_id_restaurante = restaurante.id_restaurante
+        WHERE pedido.entrega BETWEEN dataInicio AND dataFim
 		GROUP BY restaurante.id_restaurante ORDER BY COUNT(*) DESC LIMIT limite;
     ELSE
 		SELECT restaurante.id_restaurante, restaurante.nome_rest, COUNT(pedido.id_pedido) FROM restaurante
 		INNER JOIN pedido ON pedido.restaurante_id_restaurante = restaurante.id_restaurante
+        WHERE pedido.entrega BETWEEN dataInicio AND dataFim
 		GROUP BY restaurante.id_restaurante ORDER BY COUNT(*) ASC LIMIT limite;
 	END IF;
 END // 
 
-CREATE PROCEDURE `TopEntrPedidos` (IN modo int, IN limite int)
+CREATE PROCEDURE `TopEntrPedidos` (IN modo int, IN limite int, IN dataInicio DATE, IN dataFim DATE)
 BEGIN
 	IF modo = 1 THEN
 		SELECT entregador.id_entregador, entregador.nome_entregador, COUNT(pedido.id_pedido) FROM entregador
 		INNER JOIN pedido ON pedido.entregador_id_entregador = entregador.id_entregador
+        WHERE pedido.entrega BETWEEN dataInicio AND dataFim
 		GROUP BY entregador.id_entregador ORDER BY COUNT(*) DESC LIMIT limite;
     ELSE
 		SELECT entregador.id_entregador, entregador.nome_entregador, COUNT(pedido.id_pedido) FROM entregador
 		INNER JOIN pedido ON pedido.entregador_id_entregador = entregador.id_entregador
+        WHERE pedido.entrega BETWEEN dataInicio AND dataFim
 		GROUP BY entregador.id_entregador ORDER BY COUNT(*) ASC LIMIT limite;
 	END IF;
 END // 
@@ -133,51 +137,51 @@ BEGIN
 END // 
 
 
-CREATE PROCEDURE `TicketMedio` (IN idRest int)
+CREATE PROCEDURE `TicketMedio` (IN idRest int, IN dataInicio DATE, IN dataFim DATE)
 BEGIN
 	SELECT AVG(pagamento.valor) FROM restaurante
 	INNER JOIN pedido ON pedido.restaurante_id_restaurante = restaurante.id_restaurante
     INNER JOIN pagamento ON pagamento.pedido_id_pedido = pedido.id_pedido
-	WHERE restaurante.id_restaurante = idRest;
+	WHERE restaurante.id_restaurante = idRest AND pagamento.horario_pagto BETWEEN dataInicio AND dataFim;
 END //
 
-CREATE PROCEDURE `TopPratos` (IN idRest int, IN modo int, IN limite int)
+CREATE PROCEDURE `TopPratos` (IN idRest int, IN modo int, IN limite int, IN dataInicio DATE, IN dataFim DATE)
 BEGIN
 	IF modo = 1 THEN
 		SELECT prato.nome_prato, COUNT(pedido_has_prato.prato_id_prato) FROM prato
 		INNER JOIN pedido_has_prato ON pedido_has_prato.prato_id_prato = prato.id_prato
-        WHERE prato.restaurante_id_restaurante = idRest
+        WHERE prato.restaurante_id_restaurante = idRest AND pedido.entrega BETWEEN dataInicio AND dataFim
 		GROUP BY prato.nome_prato ORDER BY COUNT(*) DESC LIMIT limite;
     ELSE
 		SELECT prato.nome_prato, COUNT(pedido_has_prato.prato_id_prato) FROM prato
 		INNER JOIN pedido_has_prato ON pedido_has_prato.prato_id_prato = prato.id_prato
-        WHERE prato.restaurante_id_restaurante = idRest
+        WHERE prato.restaurante_id_restaurante = idRest AND pedido.entrega BETWEEN dataInicio AND dataFim
 		GROUP BY prato.nome_prato ORDER BY COUNT(*) ASC LIMIT limite;
 	END IF;
 END //
 
 
-CREATE PROCEDURE `TopBairros` (IN cidade varchar(50), IN modo int, IN limite int)
+CREATE PROCEDURE `TopBairros` (IN cidade varchar(50), IN modo int, IN limite int, IN dataInicio DATE, IN dataFim DATE)
 BEGIN
 	IF modo = 1 THEN
 		SELECT endereco.bairro, COUNT(pedido.id_pedido) FROM endereco
 		INNER JOIN pedido ON pedido.endereco_cep = endereco.cep AND pedido.endereco_num_end = endereco.num_end
-        WHERE endereco.cidade LIKE cidade
+        WHERE endereco.cidade LIKE cidade AND pedido.entrega BETWEEN dataInicio AND dataFim
 		GROUP BY endereco.bairro ORDER BY COUNT(pedido.id_pedido) DESC LIMIT limite;
     ELSE
 		SELECT endereco.bairro, COUNT(pedido.id_pedido) FROM endereco
 		INNER JOIN pedido ON pedido.endereco_cep = endereco.cep AND pedido.endereco_num_end = endereco.num_end
-        WHERE endereco.cidade LIKE cidade
+        WHERE endereco.cidade LIKE cidade AND pedido.entrega BETWEEN dataInicio AND dataFim
 		GROUP BY endereco.bairro ORDER BY COUNT(pedido.id_pedido) ASC LIMIT limite;
 	END IF;
 END //
 
 
-CREATE PROCEDURE `TopClientes`(IN idRest int, IN limite int)
+CREATE PROCEDURE `TopClientes`(IN idRest int, IN limite int, IN dataInicio DATE, IN dataFim DATE)
 BEGIN
 	SELECT cliente.nome_cliente, COUNT(pedido.id_pedido) FROM cliente
 	INNER JOIN pedido ON pedido.cliente_id_cliente = cliente.id_cliente
-	WHERE pedido.restaurante_id_restaurante = idRest
+	WHERE pedido.restaurante_id_restaurante = idRest AND pedido.entrega BETWEEN dataInicio AND dataFim
 	GROUP BY cliente.nome_cliente ORDER BY COUNT(pedido.id_pedido) DESC LIMIT limite;
 END //
 

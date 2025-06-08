@@ -1,7 +1,7 @@
 import random
 from faker import Faker
 import mysql.connector
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 fake = Faker('pt_BR') 
 
@@ -10,6 +10,8 @@ cursor = conn.cursor()
 
 cursor.execute("START TRANSACTION")
 conn.commit()
+
+
 
 for i in range(2000):
 
@@ -41,7 +43,7 @@ for i in range(2000):
 
 
 
-    recebido = fake.date_time()
+    recebido = fake.date_between_dates(date_start=datetime(2018,1,1), date_end=datetime(2025,12,31))
     inicio_preparo = recebido + timedelta(minutes=random.randint(1, 15))
     
     if (random.randint(1, 8) == 8):
