@@ -33,6 +33,41 @@ CREATE TABLE pedido_historico (
 PARTITION BY HASH(YEAR(recebido))
 PARTITIONS 8;
 
+DELIMITER $$
+
+CREATE TRIGGER Mover_Pedido_Antigo
+AFTER INSERT ON pedido
+FOR EACH ROW
+BEGIN
+    IF NEW.data_pedido < DATE_SUB(NOW(), INTERVAL 2 YEAR) THEN
+        INSERT INTO pedido_particionado (
+            id_pedido,
+            cliente_id_cliente,
+            restaurante_id_restaurante,
+            entregador_id_entregador,
+            data_pedido,
+            status,
+            total
+        )
+        VALUES (
+            NEW.id_pedido,
+            NEW.cliente_id_cliente,
+            NEW.restaurante_id_restaurante,
+            NEW.entregador_id_entregador,
+            NEW.data_pedido,
+            NEW.status,
+            NEW.total
+        );
+
+        -- Opcional: deletar da tabela original (use com cuidado!)
+        DELETE FROM pedido WHERE id_pedido = NEW.id_pedido;
+    END IF;
+END$$
+
+DELIMITER ;
+
+
+
 INSERT INTO pedido_historico
 SELECT * FROM pedido;
 

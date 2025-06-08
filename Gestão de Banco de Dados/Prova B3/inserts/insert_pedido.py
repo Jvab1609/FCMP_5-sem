@@ -79,27 +79,30 @@ for i in range(2000):
     rows_consulta = cursor.fetchall()
     prato_1 = rows_consulta[0][0]
 
-    pratos = []
+    pratos = [[], []]
     for j in range (random.randint(1, 4)):
         novo_prato = prato_1 + random.randint(0, count_pratos - 1)
-        if (novo_prato not in pratos):
-            params = [pedido_id, novo_prato]
-            cursor.execute("INSERT INTO pedido_has_prato VALUES (%s, %s);", params)
+        if (novo_prato not in pratos[0]):
+            qtd = random.randint(1, 3)
+            params = [pedido_id, novo_prato, qtd]
+            cursor.execute("INSERT INTO pedido_has_prato VALUES (%s, %s, %s);", params)
             conn.commit()
-            pratos.append(novo_prato)
+            pratos[1].append(qtd)
+            pratos[0].append(novo_prato)
 
     pagamento = entrega - timedelta(minutes=random.randint(1, 3))
     formas = ['Débito', 'Crédito', 'Pix', 'VR', 'Dinheiro']
     forma = formas[random.randint(0, 3)]
-    
+
     valor = 0
-    for j in range(0, len(pratos)):
-        params = [pratos[j]]
+
+    for j in range(0, len(pratos[0])):
+        params = [pratos[0][j]]
         query = ("SELECT preco FROM prato WHERE id_prato = %s;")
         cursor.execute(query, params)
         rows_consulta = cursor.fetchall()
         preco = rows_consulta[0][0]
-        valor += preco
+        valor += (preco*pratos[1][j])
 
     params = [pagamento, forma, valor, pedido_id]  
     cursor.execute("INSERT INTO pagamento VALUES (null, %s, %s, %s, %s);", params)

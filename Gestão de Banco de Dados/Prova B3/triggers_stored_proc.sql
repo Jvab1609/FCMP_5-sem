@@ -17,6 +17,8 @@ DROP TRIGGER  IF EXISTS `LogRemoverPrato`;
 DROP TRIGGER  IF EXISTS `CheckExcluido`;
 DROP TRIGGER  IF EXISTS `ExcluirPratosRest`;
 DROP TRIGGER  IF EXISTS `PedidoDeletado`;
+DROP TRIGGER  IF EXISTS `AtualizarStatus`;
+
 
 DELIMITER //
 CREATE PROCEDURE `ClassifRest`()
@@ -31,19 +33,27 @@ BEGIN
     
     REPEAT
 		FETCH nota_cursor INTO nota_i;
+        START TRANSACTION;
         IF nota_i >= 4.5 THEN
 			UPDATE restaurante SET classificacao = 'OTIMO' WHERE nota_med_restaurante = nota_i ;
+            COMMIT;
 		ELSEIF nota_i >= 4 AND nota_i < 4.5 THEN
 			UPDATE restaurante SET classificacao = 'BOM' WHERE nota_med_restaurante = nota_i;
+            COMMIT;
 		ELSEIF nota_i >= 3 AND nota_i < 4 THEN
 			UPDATE restaurante SET classificacao = 'MEDIANO' WHERE nota_med_restaurante = nota_i;
+            COMMIT;
         ELSEIF nota_i >= 2 AND nota_i < 3 THEN
 			UPDATE restaurante SET classificacao = 'RUIM' WHERE nota_med_restaurante = nota_i;    
+            COMMIT;
 		ELSEIF nota_i >= 0 AND nota_i < 2 THEN
 			UPDATE restaurante SET classificacao = 'PESSIMO' WHERE nota_med_restaurante = nota_i;
+            COMMIT;
 		ELSE
-			UPDATE restaurante SET classificacao = 'NA' WHERE nota_med_restaurante = nota_i;
+			#UPDATE restaurante SET classificacao = 'NA' WHERE nota_med_restaurante = nota_i;
+            ROLLBACK;
 		END IF;
+        
     UNTIL pronto
     END REPEAT;
     
@@ -301,3 +311,18 @@ BEGIN
     INSERT INTO log (autor, data_hora, acao)
 	VALUES (CURRENT_USER(), NOW(), CONCAT('Pedido ID ', OLD.id_pedido, ' foi deletado.'));
 END //
+
+
+CREATE TRIGGER `AtualizarStatus` AFTER UPDATE ON pedido FOR EACH ROW
+BEGIN
+	IF new.inicio_preparo != NULL AND old.inicio_preparo = NULL THEN
+		UPDATE pedido SET status = 'EM PREPARO';
+	ELSEIF new.saida != NULL AND old.saida = NULL THEN
+		UPDATE pedido SET status = 'A CAMINHO';
+	ELSEIF new.entrega != NULL AND old.entrega = NULL THEN
+		UPDATE pedido SET status = 'ENTREGUE';
+	ELSEIF new.cancelamento != NULL AND old.cancelamento = NULL THEN
+		UPDATE pedido SET status = 'CANCELADO';
+	END IF;
+END //
+
