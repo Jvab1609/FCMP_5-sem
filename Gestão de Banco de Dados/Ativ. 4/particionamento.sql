@@ -13,7 +13,7 @@ PARTITIONS 5;
 
 
 SHOW CREATE TABLE pedido;
-# Particionamento da consulta por unidade
+# Particionamento do pedido por ano
 
 CREATE TABLE pedido_historico (
   `id_pedido` int NOT NULL AUTO_INCREMENT,
@@ -33,43 +33,43 @@ CREATE TABLE pedido_historico (
 PARTITION BY HASH(YEAR(recebido))
 PARTITIONS 8;
 
-DELIMITER $$
+DROP PROCEDURE  IF EXISTS `MoverPedidosAntigos`;
 
-CREATE TRIGGER Mover_Pedido_Antigo
-AFTER INSERT ON pedido
-FOR EACH ROW
+DELIMITER //
+CREATE PROCEDURE MoverPedidosAntigos()
 BEGIN
-    IF NEW.data_pedido < DATE_SUB(NOW(), INTERVAL 2 YEAR) THEN
-        INSERT INTO pedido_particionado (
-            id_pedido,
-            cliente_id_cliente,
-            restaurante_id_restaurante,
-            entregador_id_entregador,
-            data_pedido,
-            status,
-            total
-        )
-        VALUES (
-            NEW.id_pedido,
-            NEW.cliente_id_cliente,
-            NEW.restaurante_id_restaurante,
-            NEW.entregador_id_entregador,
-            NEW.data_pedido,
-            NEW.status,
-            NEW.total
-        );
+    DECLARE erro BOOL DEFAULT FALSE;
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET erro = TRUE;
+    START TRANSACTION;
+    
+    
 
-        -- Opcional: deletar da tabela original (use com cuidado!)
-        DELETE FROM pedido WHERE id_pedido = NEW.id_pedido;
+    INSERT INTO pedido_historico (
+        status, recebido, inicio_preparo, saida, entrega, cancelamento,
+        restaurante_id_restaurante, entregador_id_entregador,
+        cliente_id_cliente, endereco_cep, endereco_num_end
+    )
+    SELECT 
+        status, recebido, inicio_preparo, saida, entrega, cancelamento,
+        restaurante_id_restaurante, entregador_id_entregador,
+        cliente_id_cliente, endereco_cep, endereco_num_end
+    FROM pedido
+    WHERE recebido < NOW() - INTERVAL 1 YEAR;
+
+    DELETE FROM pedido
+    WHERE recebido < NOW() - INTERVAL 1 YEAR;
+
+    IF erro THEN
+        ROLLBACK;
+    ELSE
+        COMMIT;
     END IF;
-END$$
+END//
+
+CALL MoverPedidosAntigos();
 
 DELIMITER ;
 
-
-
-INSERT INTO pedido_historico
-SELECT * FROM pedido;
 
 # Particionamento da nota fiscal por forma de pagamento
 CREATE TABLE pagamento_particionado (
