@@ -50,7 +50,6 @@ BEGIN
 			UPDATE restaurante SET classificacao = 'PESSIMO' WHERE nota_med_restaurante = nota_i;
             COMMIT;
 		ELSE
-			#UPDATE restaurante SET classificacao = 'NA' WHERE nota_med_restaurante = nota_i;
             ROLLBACK;
 		END IF;
         
@@ -76,16 +75,21 @@ BEGIN
 		FETCH nota_cursor INTO nota_i;
         IF nota_i >= 4.5 THEN
 			UPDATE entregador SET classificacao = 'OTIMO' WHERE nota_media_entregador = nota_i ;
+            COMMIT;
 		ELSEIF nota_i >= 4 AND nota_i < 4.5 THEN
 			UPDATE entregador SET classificacao = 'BOM' WHERE nota_media_entregador = nota_i;
+            COMMIT;
 		ELSEIF nota_i >= 3 AND nota_i < 4 THEN
 			UPDATE entregador SET classificacao = 'MEDIANO' WHERE nota_media_entregador = nota_i;
+            COMMIT;
         ELSEIF nota_i >= 2 AND nota_i < 3 THEN
 			UPDATE entregador SET classificacao = 'RUIM' WHERE nota_media_entregador = nota_i; 
+            COMMIT;
 		ELSEIF nota_i >= 0 AND nota_i < 2 THEN
 			UPDATE entregador SET classificacao = 'PESSIMO' WHERE nota_media_entregador = nota_i;
+            COMMIT;
 		ELSE
-			UPDATE entregador SET classificacao = 'NA' WHERE nota_media_entregador = nota_i;
+			ROLLBACK;
 		END IF;
     UNTIL pronto
     END REPEAT;
